@@ -1,4 +1,4 @@
-package com.monpro.thread;
+package com.monpro.thread.producer_consumer;
 
 public class Consumer extends Thread {
     BlockingQueue<String> queue = null;

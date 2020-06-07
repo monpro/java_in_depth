@@ -1,4 +1,4 @@
-package com.monpro.thread;
+package com.monpro.thread.producer_consumer;
 
 /***
  *  wait and notify are called by different threads
@@ -29,11 +29,4 @@ public class WaitThread extends Thread{
         notify();
     }
 
-    public static void main(String[] args) throws InterruptedException {
-        WaitThread waitThread = new WaitThread();
-        waitThread.start();
-        Thread.sleep(1000);
-        System.out.println("fire");
-        waitThread.fire();
-    }
 }

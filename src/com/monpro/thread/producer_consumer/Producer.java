@@ -1,4 +1,4 @@
-package com.monpro.thread;
+package com.monpro.thread.producer_consumer;
 
 
 public class Producer extends Thread {
