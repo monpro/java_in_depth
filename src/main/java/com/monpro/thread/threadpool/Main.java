@@ -1,5 +1,9 @@
 package com.monpro.thread.threadpool;
 
+import redis.clients.jedis.Jedis;
+
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.UUID;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -80,10 +84,41 @@ public class Main {
         return atomicInteger.intValue();
     }
 
+
+    public static int threadPoolActiveThreadsFirst() {
+        BlockingQueue<Runnable> queue = new LinkedBlockingQueue<Runnable>(10) {
+            @Override
+            public boolean offer(Runnable runnable) {
+                //return false, let thread pool increase threads first
+                return false;
+            }
+        };
+
+        ThreadPoolExecutor threadPool = new ThreadPoolExecutor(
+                2, 5, 5, TimeUnit.SECONDS,
+                queue, r -> new Thread(r), (r, executor) -> {
+            try {
+                // when reject threads, then add tasks into queue
+                if (!executor.getQueue().offer(r, 0, TimeUnit.SECONDS)) {
+                    throw new RejectedExecutionException("ThreadPool queue full, failed to offer " + r.toString());
+                }
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        });
+
+        getThreadPoolInfo(threadPool);
+
+        // repeat atomicInteger counter code
+        return 0;
+    }
+
     public static void main(String[] args) throws InterruptedException {
 //        oomWithExecutor();
 //        threadPoolCounter();
-        System.out.println(threadPoolCounter());
+//        System.out.println(threadPoolCounter());
+        Jedis jedis = new Jedis();
+        System.out.println(jedis);
     }
 
 }
