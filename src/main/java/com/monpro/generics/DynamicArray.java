@@ -1,10 +1,14 @@
 package com.monpro.generics;
 
 import java.util.Arrays;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
-public class DynamicArray<E> {
+public class DynamicArray<E> implements Iterator<E> {
     private static final int DEFAULT_CAPACITY = 1;
-    private int size;
+    private int size = 0;
+    private int cursor = 0;
+    private int lastCursor = -1;
     private Object[] elements;
 
     public DynamicArray() {
@@ -88,6 +92,42 @@ public class DynamicArray<E> {
         }
     }
 
+    public E remove(int index) {
+        E oldValue = get(index);
+        int numMoved = size - index - 1;
+        if(numMoved > 0) {
+            System.arraycopy(elements, index + 1, elements, index, numMoved);
+        }
+        elements[--size] = null;
+        return oldValue;
+    }
+
+    // by implementing Iterator interface
+    @Override
+    public boolean hasNext() {
+        return cursor != size;
+    }
+
+    @Override
+    public E next() {
+        int i = cursor;
+        if( i >= size) {
+            throw new NoSuchElementException();
+        }
+        cursor = i + 1;
+        lastCursor = i;
+        return get(i);
+    }
+
+    @Override
+    public void remove() {
+        if(lastCursor < 0) {
+            throw new IllegalStateException();
+        }
+        remove(lastCursor);
+        cursor = lastCursor;
+        lastCursor = -1;
+    }
 
     @Override
     public String toString() {
@@ -126,6 +166,10 @@ public class DynamicArray<E> {
 
         // it doesn't have super extends here
         //intArray.copyTo(doubleArray);
+
+        System.out.println(intArray.next());
+        intArray.remove();
+        System.out.println(intArray);
     }
 }
 
