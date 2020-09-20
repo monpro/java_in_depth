@@ -42,11 +42,52 @@ public class DynamicArray<E> {
         return oldValue;
     }
     // this make sure DynamicArray<T> element could be added to DynamicArray<E>
-    public <T extends E> void addAll(DynamicArray<T> arr) {
+//    public <T extends E> void addAll(DynamicArray<T> arr) {
+    public void addAll(DynamicArray<? extends E> arr) {
         for(int i = 0; i < arr.size; i++) {
             add(arr.get(i));
         }
     }
+
+//    public static <T> int indexOf(DynamicArray<T> arr, Object element) {
+    public static int indexOf(DynamicArray<? > arr, Object element) {
+        for(int i = 0; i < arr.size; i++) {
+            if(arr.get(i).equals(element)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+//    public void swap(DynamicArray<? > arr, int i, int j) {
+//        Object temp = arr.get(i);
+//        arr.set(i, arr.get(j));
+//        arr.set(j, temp);
+//    }
+
+    public static void swap(DynamicArray<? > arr, int i, int j) {
+        swapInternal(arr, i, j);
+    }
+
+    private static <T> void swapInternal(DynamicArray<T> arr, int i, int j) {
+        T temp = arr.get(i);
+        arr.set(i, arr.get(j));
+        arr.set(j, temp);
+    }
+
+//    public static <D, S extends D> void copy(DynamicArray<D> dest, DynamicArray<S> src) {
+    public static <D> void copy(DynamicArray<D> dest, DynamicArray<? extends D> src) {
+        for(int i = 0; i < src.size; i++) {
+            dest.add(src.get(i));
+        }
+    }
+
+    public void copyTo(DynamicArray< ? super E> dest) {
+        for(int i = 0; i < size; i++) {
+            dest.add(get(i));
+        }
+    }
+
 
     @Override
     public String toString() {
@@ -77,6 +118,14 @@ public class DynamicArray<E> {
         numberDynamicArray.addAll(doubleArray);
 
         System.out.println(numberDynamicArray);
+
+        DynamicArray.swap(numberDynamicArray, 1, 6);
+        System.out.println(numberDynamicArray);
+
+        intArray.copyTo(numberDynamicArray);
+
+        // it doesn't have super extends here
+        //intArray.copyTo(doubleArray);
     }
 }
 
