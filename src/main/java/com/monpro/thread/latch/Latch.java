@@ -14,9 +14,9 @@ public class Latch {
     }
 
     public synchronized void countDown(){
-        count--;
-        if(count <= 0){
-            notifyAll();
+        while (count > 0) {
+            count--;
         }
+        notifyAll();
     }
 }

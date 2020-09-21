@@ -24,7 +24,7 @@ public class RacerWithLatch {
 
     public static void main(String[] args) throws InterruptedException {
         int num = 10;
-        Latch latch = new Latch(1);
+        Latch latch = new Latch(2);
         Thread[] races = new Thread[10];
 
         for(int i = 0; i < num; i++){

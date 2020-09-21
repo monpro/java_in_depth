@@ -1,4 +1,4 @@
-package com.monpro.thread.producer_consumer;
+package com.monpro.thread.wait;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException {

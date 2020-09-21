@@ -1,4 +1,4 @@
-package com.monpro.thread.producer_consumer;
+package com.monpro.thread.wait;
 
 import java.util.ArrayDeque;
 import java.util.Queue;

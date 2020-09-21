@@ -1,4 +1,4 @@
-package com.monpro.thread.producer_consumer;
+package com.monpro.thread.wait;
 
 /***
  *  wait and notify are called by different threads
