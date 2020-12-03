@@ -1,9 +1,6 @@
 package com.monpro.thread.threadpool;
 
-import redis.clients.jedis.Jedis;
 
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.UUID;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -114,11 +111,7 @@ public class Main {
     }
 
     public static void main(String[] args) throws InterruptedException {
-//        oomWithExecutor();
-//        threadPoolCounter();
-//        System.out.println(threadPoolCounter());
-        Jedis jedis = new Jedis();
-        System.out.println(jedis);
+
     }
 
 }
