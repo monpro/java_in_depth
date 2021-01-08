@@ -1,5 +1,9 @@
 package com.monpro.generics.util;
 
+import java.util.HashSet;
+import java.util.Set;
+import java.util.Stack;
+
 public class ArrayUtils {
     private ArrayUtils() {
     }
@@ -44,5 +48,29 @@ public class ArrayUtils {
             }
         }
         return result;
+    }
+
+    public static boolean canReachToIndexWithValueZero(int[] nums, int start) {
+        Stack<Integer> stack = new Stack<>();
+        Set<Integer> set = new HashSet<>();
+        stack.add(start);
+
+        while(!stack.isEmpty()) {
+            int index = stack.pop();
+            if(nums[index] == 0) {
+                return true;
+            }
+            int left = index - nums[index];
+            int right = index + nums[index];
+            if(left >= 0 && !set.contains(left)) {
+                stack.add(left);
+                set.add(left);
+            }
+            if(right < nums.length && !set.contains(right)) {
+                stack.add(right);
+                set.add(right);
+            }
+        }
+        return false;
     }
 }
