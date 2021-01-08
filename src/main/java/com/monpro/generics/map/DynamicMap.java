@@ -1,10 +1,13 @@
-package com.monpro.generics;
+package com.monpro.generics.map;
+
+import com.monpro.generics.array.DynamicArray;
+import com.monpro.generics.array.DynamicArrayIterator;
 
 import java.util.*;
 
 public class DynamicMap<K, V> extends AbstractMap<K, V> {
 
-    private DynamicArray<Map.Entry<K, V>> array;
+    private DynamicArray<Entry<K, V>> array;
     private Set<Entry<K, V>> entrySet = null;
 
     public DynamicMap() {
@@ -41,7 +44,7 @@ public class DynamicMap<K, V> extends AbstractMap<K, V> {
 
     class EntrySet extends AbstractSet<Entry<K, V>> {
         public Iterator<Entry<K, V>> iterator() {
-            return new DynamicArrayIterator<Map.Entry<K, V>>(array);
+            return new DynamicArrayIterator<Entry<K, V>>(array);
         }
 
         public int size() {

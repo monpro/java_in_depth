@@ -1,6 +1,5 @@
-package com.monpro.generics;
+package com.monpro.generics.array;
 
-import java.util.Iterator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 public class DynamicArrayIterator <E> implements Iterator<E> {

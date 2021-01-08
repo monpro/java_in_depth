@@ -17,7 +17,6 @@ public class Main {
     public static void main(String[] args) throws InterruptedException {
         ExecutorService executor = new ExecutorService();
         Future<Integer> future = executor.submit(new Task());
-
         //other task
         Thread.sleep(1000);
         try{

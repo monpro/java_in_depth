@@ -33,7 +33,7 @@ public class AtomicIntegerFieldUpdaterThread implements Runnable {
         thread1.join();
         thread2.join();
         System.out.println("leader score: " + leader.score);
-        System.out.println("worker score(with updater): " + worker.score);
+        System.out.println("worker score: ");
 
     }
 

@@ -1,4 +1,4 @@
-package com.monpro.generics;
+package com.monpro.generics.array;
 
 import java.util.Iterator;
 
