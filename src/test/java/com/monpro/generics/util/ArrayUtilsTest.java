@@ -12,4 +12,16 @@ public class ArrayUtilsTest {
         assertEquals(ArrayUtils.skipToLastIndex(nums), false);
         assertEquals(ArrayUtils.skipToLastIndex(new int[]{}), true);
     }
+
+    @Test
+    void minStepsToLastIndexTest() {
+        int[] nums = new int[]{2,3,1,1,4};
+        assertEquals(ArrayUtils.minStepsToLastIndex(nums), 2);
+        nums = new int[]{3,2,1,0,4};
+        assertEquals(ArrayUtils.minStepsToLastIndex(nums), 2);
+        nums = new int[]{2,6,1,0,4,5,4};
+        assertEquals(ArrayUtils.minStepsToLastIndex(nums), 2);
+
+
+    }
 }

@@ -31,4 +31,18 @@ public class ArrayUtils {
         }
         return true;
     }
+
+    public static int minStepsToLastIndex(int[] nums) {
+        int result = 0;
+        int curFurthest = 0, curEnd = 0;
+
+        for(int cur = 0; cur < nums.length - 1; cur++) {
+            curFurthest = Math.max(cur + nums[cur], curFurthest);
+            if(cur == curEnd) {
+                result += 1;
+                curEnd = curFurthest;
+            }
+        }
+        return result;
+    }
 }
