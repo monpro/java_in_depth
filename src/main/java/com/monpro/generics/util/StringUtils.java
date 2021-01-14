@@ -37,4 +37,26 @@ public class StringUtils {
         result += Math.min(countA, countB) * y;
         return result;
     }
+
+
+    public static String getMaximumBinaryString(String s) {
+        int oneCount = 0, zeroCount = 0, n = s.length();
+        StringBuilder sb = new StringBuilder();
+        for(int i = 0; i < n; i++) {
+            sb.append("1");
+        }
+
+        for(char ch: s.toCharArray()) {
+            if (ch == '1' && zeroCount == 0) {
+                oneCount += 1;
+            } else if(ch == '0') {
+                zeroCount += 1;
+            }
+        }
+
+        if(oneCount < n) {
+            sb.setCharAt(oneCount + zeroCount - 1, '0');
+        }
+        return sb.toString();
+    }
 }
