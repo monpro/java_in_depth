@@ -36,4 +36,13 @@ public class ArrayUtilsTest {
         assertEquals(ArrayUtils.canReachToIndexWithValueZero(nums, start), false);
     }
 
+    @Test
+    void shortestPathInBinaryMatrixTest() {
+        assertEquals(ArrayUtils.shortestPathInBinaryMatrix(new int[][]{{0, 1}, {1, 0}}), 2);
+        assertEquals(ArrayUtils.shortestPathInBinaryMatrix(new int[][]{{1, 1}, {1, 0}}), -1);
+        assertEquals(ArrayUtils.shortestPathInBinaryMatrix(new int[][]{{0, 0, 0}, {1, 1, 0}, {1, 1, 0}}), 4);
+        assertEquals(ArrayUtils.shortestPathInBinaryMatrix(new int[][]{{0, 0, 0}, {1, 1, 0}, {1, 1, 1}}), -1);
+    }
+
+
 }
