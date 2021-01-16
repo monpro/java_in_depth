@@ -59,4 +59,18 @@ public class StringUtils {
         }
         return sb.toString();
     }
+
+    public static String replacePalindrome(String palindrome) {
+        int n = palindrome.length();
+        char[] array = palindrome.toCharArray();
+        // cannot be a palindrome after replace
+        for(int i = 0; i < n / 2; i++) {
+            if(array[i] != 'a') {
+                array[i] = 'a';
+                return String.valueOf(array);
+            }
+        }
+        array[n - 1] = 'b';
+        return n >= 2 ? String.valueOf(array) : "";
+    }
 }

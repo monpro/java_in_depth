@@ -10,4 +10,10 @@ public class StringUtilsTest {
         assertEquals(StringUtils.maximumPoints("baba", 4, 5), 10);
         assertEquals(StringUtils.maximumPoints("babacdab", 10, 2), 22);
     }
+
+    @Test
+    void replacePalindromeTest(){
+        assertEquals(StringUtils.replacePalindrome("abcba"), "aacba");
+        assertEquals(StringUtils.replacePalindrome("aba"), "abb");
+    }
 }
