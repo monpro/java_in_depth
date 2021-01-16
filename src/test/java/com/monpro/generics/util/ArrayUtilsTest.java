@@ -44,5 +44,11 @@ public class ArrayUtilsTest {
         assertEquals(ArrayUtils.shortestPathInBinaryMatrix(new int[][]{{0, 0, 0}, {1, 1, 0}, {1, 1, 1}}), -1);
     }
 
+    @Test
+    void getSumOfDiagonalTest(){
+        assertEquals(ArrayUtils.getSumOfDiagonal(new int[][]{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}}), 25);
+        assertEquals(ArrayUtils.getSumOfDiagonal(new int[][]{{7}}), 7);
+        assertEquals(ArrayUtils.getSumOfDiagonal(new int[][]{{1, 2}, {3, 4}}), 10);
+    }
 
 }

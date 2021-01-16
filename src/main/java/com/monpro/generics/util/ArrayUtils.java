@@ -2,20 +2,20 @@ package com.monpro.generics.util;
 
 import java.util.*;
 
-class Point {
-  int x;
-  int y;
-  int val;
-
-  Point(int x, int y, int val) {
-    this.x = x;
-    this.y = y;
-    this.val = val;
-  }
-}
-
 public class ArrayUtils {
   private ArrayUtils() {}
+
+  static class Point {
+    int x;
+    int y;
+    int val;
+
+    Point(int x, int y, int val) {
+      this.x = x;
+      this.y = y;
+      this.val = val;
+    }
+  }
 
   public static boolean skipToLastIndex(int[] nums) {
     /**
@@ -107,5 +107,29 @@ public class ArrayUtils {
   public static boolean isValid(int[][] grid, boolean[][] visited, int x, int y) {
     int m = grid.length, n = grid[0].length;
     return x >= 0 && x <= m - 1 && y >= 0 && y <= n - 1 && grid[x][y] == 0;
+  }
+
+  public static int getSumOfDiagonal(int[][] mat) {
+    int result = 0;
+    int x = 0, y = 0;
+    int m = mat.length;
+    while (x < m && y < m) {
+      result += mat[x][y];
+      x += 1;
+      y += 1;
+    }
+
+    x = 0;
+    y = m - 1;
+    while (x < m && y >= 0) {
+      result += mat[x][y];
+      x += 1;
+      y -= 1;
+    }
+
+    if (m % 2 == 1) {
+      result -= mat[m / 2][m / 2];
+    }
+    return result;
   }
 }
