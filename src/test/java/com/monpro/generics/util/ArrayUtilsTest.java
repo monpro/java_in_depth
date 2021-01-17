@@ -2,7 +2,9 @@ package com.monpro.generics.util;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -76,5 +78,17 @@ public class ArrayUtilsTest {
       points[3] = new Point(1, 3);
 
       assertEquals(ArrayUtils.maxPointsOnSameLine(points), 3);
+  }
+
+  @Test
+  void minimumPointsCombineArrayTest() {
+      List<Integer> list = new ArrayList<>(Arrays.asList(3, 7, 5, 12, 18, 4));
+      assertEquals(ArrayUtils.minimumPointsCombineArray(list), 117);
+  }
+
+  @Test
+  void throwCountTest() {
+      float[] bags = new float[]{1.01f,2.21f,1.30f};
+      assertEquals(ArrayUtils.throwCount(bags, 3.00f), 2);
   }
 }

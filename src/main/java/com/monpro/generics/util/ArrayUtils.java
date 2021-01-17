@@ -195,4 +195,24 @@ public class ArrayUtils {
     }
     return result;
   }
+
+  public static int throwCount(float[] bags, float limit) {
+    int left = 0, right = bags.length - 1;
+    int result = 0;
+    Arrays.sort(bags);
+
+    while(left <= right) {
+      while(left < right && bags[left] + bags[right] > limit) {
+        right -= 1;
+        result += 1;
+      }
+
+      if(left == right || bags[left] + bags[right] <= limit) {
+        right -= 1;
+        left += 1;
+        result += 1;
+      }
+    }
+    return result;
+  }
 }
