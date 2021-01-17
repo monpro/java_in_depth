@@ -5,18 +5,6 @@ import java.util.*;
 public class ArrayUtils {
   private ArrayUtils() {}
 
-  static class Point {
-    int x;
-    int y;
-    int val;
-
-    Point(int x, int y, int val) {
-      this.x = x;
-      this.y = y;
-      this.val = val;
-    }
-  }
-
   public static boolean skipToLastIndex(int[] nums) {
     /**
      * O(n^2) solution
@@ -149,5 +137,47 @@ public class ArrayUtils {
       }
     }
     return cells;
+  }
+
+  public static int maxPointsOnSameLine(Point[] points) {
+    if (points == null) {
+      return 0;
+    }
+    int result = 0;
+    Map<String, Integer> count = new HashMap<>();
+    for(int i = 0; i < points.length; i++) {
+      count.clear();
+      int sameLine = 0, vertical = 0, overlap = 0;
+      for(int j = i + 1; j < points.length; j++) {
+        if(points[j].x == points[i].x) {
+          if(points[j].y == points[i].y) {
+            overlap += 1;
+          } else {
+            vertical += 1;
+          }
+          continue;
+        }
+        int dy = points[j].y - points[i].y;
+        int dx = points[j].x - points[i].x;
+        int gcd = getGcd(dy, dx);
+        dy /= gcd;
+        dx /= gcd;
+        String key = dy + "/" + dx;
+        count.put(key, count.getOrDefault(key, 0) + 1);
+        sameLine = Math.max(sameLine, count.get(key));
+      }
+      sameLine = Math.max(sameLine, vertical);
+      result = Math.max(result, sameLine + overlap + 1);
+
+    }
+    return result;
+  }
+
+  private static int getGcd(int a, int b) {
+    if (b == 0) {
+      return a;
+    } else {
+      return getGcd(b, a % b);
+    }
   }
 }

@@ -66,4 +66,15 @@ public class ArrayUtilsTest {
         Arrays.toString(ArrayUtils.transfromCells(array, 7)),
         Arrays.toString(new int[] {0, 0, 1, 1, 0, 0, 0, 0}));
   }
+
+  @Test
+  void maxPointsOnSameLineTest() {
+      Point[] points = new Point[4];
+      points[0] = new Point(1, 2);
+      points[1] = new Point(3, 6);
+      points[2] = new Point(0, 0);
+      points[3] = new Point(1, 3);
+
+      assertEquals(ArrayUtils.maxPointsOnSameLine(points), 3);
+  }
 }
