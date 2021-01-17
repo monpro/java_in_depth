@@ -180,4 +180,19 @@ public class ArrayUtils {
       return getGcd(b, a % b);
     }
   }
+  public static int minimumPointsCombineArray(List<Integer> sticks) {
+    // write your code here
+    PriorityQueue<Integer> queue = new PriorityQueue<>();
+    for(Integer stick: sticks) {
+      queue.add(stick);
+    }
+    int result = 0;
+    while(queue.size() > 1) {
+      Integer stick = queue.poll();
+      stick += queue.poll();
+      result += stick;
+      queue.add(stick);
+    }
+    return result;
+  }
 }
