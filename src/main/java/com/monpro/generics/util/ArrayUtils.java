@@ -132,4 +132,22 @@ public class ArrayUtils {
     }
     return result;
   }
+
+  public static int[] transfromCells(int[] cells, int N) {
+    Map<String, Integer> cache = new HashMap<>();
+    while (N > 0) {
+      int[] nextCells = new int[8];
+      cache.put(Arrays.toString(cells), N);
+      N -= 1;
+      for (int i = 1; i < 7; i++) {
+        nextCells[i] = cells[i - 1] == cells[i + 1] ? 1 : 0;
+      }
+      cells = nextCells;
+      String key = Arrays.toString(cells);
+      if (cache.containsKey(key)) {
+        N %= cache.get(key) - N;
+      }
+    }
+    return cells;
+  }
 }

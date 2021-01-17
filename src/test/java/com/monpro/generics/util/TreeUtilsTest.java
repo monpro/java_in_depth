@@ -15,7 +15,5 @@ public class TreeUtilsTest {
         treeNode.left.left = new TreeNode(0);
         treeNode.left.right = new TreeNode(1);
         assertEquals(TreeUtils.maximumAverageSubValue(treeNode), 13);
-
     }
-
 }
