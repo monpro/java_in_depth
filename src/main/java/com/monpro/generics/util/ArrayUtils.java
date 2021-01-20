@@ -215,4 +215,25 @@ public class ArrayUtils {
     }
     return result;
   }
+
+  public static boolean canPartition(int[] nums) {
+    if (nums.length < 5) return false;
+    int prefix = 0, suffix = nums[nums.length - 1];
+    Map<Integer, Integer> prefix_sum = new HashMap<>();
+    for (int i = 1; i < nums.length - 3; i++) {
+      prefix += nums[i - 1];
+      prefix_sum.put(prefix, i);
+    }
+    int total = 0;
+    for (int n : nums)
+      total += n;
+    for (int i = nums.length - 2; i >= 3; i--) {
+      if (prefix_sum.containsKey(suffix) && prefix_sum.get(suffix) <= i - 2) {
+        int mid = total - 2 * suffix - nums[i] - nums[prefix_sum.get(suffix)];
+        if (mid == suffix) return true;
+      }
+      suffix += nums[i];
+    }
+    return false;
+  }
 }

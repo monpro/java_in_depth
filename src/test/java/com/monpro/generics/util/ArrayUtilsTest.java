@@ -91,4 +91,10 @@ public class ArrayUtilsTest {
       float[] bags = new float[]{1.01f,2.21f,1.30f};
       assertEquals(ArrayUtils.throwCount(bags, 3.00f), 2);
   }
+
+  @Test
+  void canPartitionTest() {
+      int[] num = new int[]{2, 4, 5, 3, 3, 9, 2, 2, 2};
+      assertEquals(ArrayUtils.canPartition(num), true);
+  }
 }
