@@ -236,4 +236,52 @@ public class ArrayUtils {
     }
     return false;
   }
+
+  public static List<String> convertToPostfixNotation(String[] expression) {
+    if (expression == null || expression.length == 0) {
+      return null;
+    }
+
+    List<String> result = new ArrayList<>();
+    Stack<String> stack = new Stack<>();
+
+    for(String str: expression) {
+      if (str.equals("(")) {
+        stack.push(str);
+      }
+      else if (str.equals(")")) {
+        while (!stack.peek().equals("(")) {
+          result.add(stack.pop());
+        }
+        stack.pop();
+      }
+      else if(Character.isDigit(str.charAt(0))) {
+        result.add(str);
+      }
+      else {
+        // stack only includes symbols
+        // we need to add the symbol with highest priority first
+        while (!stack.isEmpty() && getPriority(stack.peek()) >= getPriority(str)) {
+          result.add(stack.pop());
+        }
+        stack.add(str);
+      }
+    }
+
+    while (!stack.isEmpty()) {
+      result.add(stack.pop());
+    }
+
+    return result;
+  }
+
+  private static int getPriority(String str) {
+    if (str.equals("*") || str.equals("/")) {
+      return 3;
+    } else if(str.equals("+") || str.equals("-")) {
+      return 2;
+    } else if(str.equals("(")) {
+      return 1;
+    } return 0;
+  }
 }

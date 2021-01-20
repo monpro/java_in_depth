@@ -97,4 +97,17 @@ public class ArrayUtilsTest {
       int[] num = new int[]{2, 4, 5, 3, 3, 9, 2, 2, 2};
       assertEquals(ArrayUtils.canPartition(num), true);
   }
+
+  @Test
+  void convertToPostfixNotationTest() {
+    assertEquals(
+        ArrayUtils.convertToPostfixNotation(new String[] {"3", "-", "4", "+", "5"}).toString(),
+        new ArrayList<>(Arrays.asList("3", "4", "-", "5", "+")).toString());
+    assertEquals(
+            ArrayUtils.convertToPostfixNotation(new String[] {"(", "3", "-", "4", ")", "*", "5"}).toString(),
+            new ArrayList<>(Arrays.asList("3", "4", "-", "5", "*")).toString());
+    assertEquals(
+            ArrayUtils.convertToPostfixNotation(new String[] {"3", "-", "4", "*", "5"}).toString(),
+            new ArrayList<>(Arrays.asList("3", "4", "5", "*", "-")).toString());
+  }
 }
