@@ -16,4 +16,12 @@ public class StringUtilsTest {
         assertEquals(StringUtils.replacePalindrome("abcba"), "aacba");
         assertEquals(StringUtils.replacePalindrome("aba"), "abb");
     }
+
+
+    @Test
+    void firstUniCharTest() {
+        assertEquals(StringUtils.firstUniChar("abaccdef"), 'b');
+        assertEquals(StringUtils.firstUniChar("abbcac"), ' ');
+        assertEquals(StringUtils.firstUniChar("abbefefgcc"), 'a');
+    }
 }

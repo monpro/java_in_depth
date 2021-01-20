@@ -73,4 +73,21 @@ public class StringUtils {
         array[n - 1] = 'b';
         return n >= 2 ? String.valueOf(array) : "";
     }
+
+    public static char firstUniChar(String str) {
+        if(str == null || str.length() == 0) {
+            return ' ';
+        }
+        int[] count = new int[256];
+        char[] array = str.toCharArray();
+        for(char ch: array) {
+            count[ch - 'a'] += 1;
+        }
+        for(char ch: array) {
+            if(count[ch - 'a'] == 1) {
+                return ch;
+            }
+        }
+        return ' ';
+    }
 }
