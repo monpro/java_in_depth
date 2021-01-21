@@ -2,6 +2,14 @@ package com.monpro.generics.util;
 
 import java.util.*;
 
+class Interval {
+    int start, end;
+    Interval(int start, int end) {
+        this.start = start;
+        this.end = end;
+    }
+}
+
 public class ArrayUtils {
   private ArrayUtils() {}
 
@@ -283,5 +291,24 @@ public class ArrayUtils {
     } else if(str.equals("(")) {
       return 1;
     } return 0;
+  }
+
+  public static List<Long> getSumOfIntervals(int[] nums, List<Interval> intervals) {
+      List<Long> result = new ArrayList<>();
+      if(intervals == null || intervals.size() == 0 || nums == null || nums.length == 0) {
+          return result;
+      }
+      long[] prefixSum = new long[nums.length + 1];
+      long prefix = 0;
+      for(int i = 1; i < nums.length + 1; i++) {
+          prefix += nums[i - 1];
+          prefixSum[i] = prefix;
+      }
+      for(Interval interval: intervals) {
+          int start = interval.start;
+          int end = interval.end;
+          result.add(prefixSum[end + 1] - prefixSum[start]);
+      }
+      return result;
   }
 }

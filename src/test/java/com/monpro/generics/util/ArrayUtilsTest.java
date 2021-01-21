@@ -110,4 +110,18 @@ public class ArrayUtilsTest {
             ArrayUtils.convertToPostfixNotation(new String[] {"3", "-", "4", "*", "5"}).toString(),
             new ArrayList<>(Arrays.asList("3", "4", "5", "*", "-")).toString());
   }
+
+  @Test
+  void getSumOfIntervalsTest() {
+    Interval interval1 = new Interval(1, 3);
+    Interval interval2 = new Interval(2, 4);
+    Interval interval3 = new Interval(1, 4);
+
+    assertEquals(
+        ArrayUtils.getSumOfIntervals(
+            new int[] {1, 2, 3, 4, 5},
+            new ArrayList<Interval>(Arrays.asList(interval1, interval2, interval3))).toString(),
+            new ArrayList<Long>(Arrays.asList(9L, 12L, 14L)).toString()
+            );
+  }
 }
