@@ -358,4 +358,49 @@ public class ArrayUtils {
     }
     return true;
   }
+
+  public static boolean bipartitionArrayTraverse(int N, int[][] differentGroup) {
+    // if we tried to do the partition
+    // then dislike[i] cannot be in same group
+    // we need to find the dislike mapping
+    // [1: {2, 3}]
+    Map<Integer, List<Integer>> mapping = new HashMap<>();
+    for(int i = 1; i <= N; i++) {
+      mapping.put(i, new ArrayList<Integer>());
+    }
+
+    for(int[] dislike: differentGroup) {
+      int dislikeFront = dislike[0], dislikeEnd = dislike[1];
+      List<Integer> frontList = mapping.get(dislikeFront);
+      List<Integer> endList = mapping.get(dislikeEnd);
+      frontList.add(dislikeEnd);
+      endList.add(dislikeFront);
+      mapping.put(dislikeFront, frontList);
+      mapping.put(dislikeEnd, endList);
+    }
+    // 1 means first group
+    // -1 means second group
+    int[] group = new int[N + 1];
+    for(int i = 1; i <= N; i++) {
+      if(group[i] == 0) {
+        group[i] = -1;
+        Queue<Integer> queue = new LinkedList<>();
+        queue.add(i);
+        while (!queue.isEmpty()) {
+          int node = queue.poll();
+          for(int dislike: mapping.get(node)) {
+            if(group[dislike] == 0) {
+              group[dislike] = group[node] == 1 ? -1: 1;
+              queue.offer(dislike);
+            } else {
+              if(group[dislike] == group[node]) {
+                return false;
+              }
+            }
+          }
+        }
+      }
+    }
+    return true;
+  }
 }

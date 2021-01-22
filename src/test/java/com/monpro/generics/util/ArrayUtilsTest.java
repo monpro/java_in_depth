@@ -130,6 +130,10 @@ public class ArrayUtilsTest {
     assertEquals(ArrayUtils.bipartitionArray(4, new int[][]{{1, 2}, {1, 3}, {2, 4}}), true);
     assertEquals(ArrayUtils.bipartitionArray(4, new int[][]{{1, 2}, {1, 3}}), true);
     assertEquals(ArrayUtils.bipartitionArray(4, new int[][]{{1, 2}, {1, 3}, {2, 4}, {1, 4}}), false);
+
+    assertEquals(ArrayUtils.bipartitionArrayTraverse(4, new int[][]{{1, 2}, {1, 3}, {2, 4}}), true);
+    assertEquals(ArrayUtils.bipartitionArrayTraverse(4, new int[][]{{1, 2}, {1, 3}}), true);
+    assertEquals(ArrayUtils.bipartitionArrayTraverse(4, new int[][]{{1, 2}, {1, 3}, {2, 4}, {1, 4}}), false);
   }
 
 }
