@@ -464,4 +464,35 @@ public class ArrayUtils {
     }
     return parent[x];
   }
+
+  public static int getDelayTime(int[][] times, int n, int k) {
+    int result = 0;
+    // [source: {target: dist}]
+    Map<Integer, Map<Integer, Integer>> map = new HashMap<>();
+    boolean[] visited = new boolean[n + 1];
+    Queue<int[]> pq = new PriorityQueue<>((a, b) -> a[0] - b[0]);
+    pq.add(new int[] {0, k});
+    for (int[] time : times) {
+      map.putIfAbsent(time[0], new HashMap<>());
+      map.get(time[0]).put(time[1], time[2]);
+    }
+
+    while (!pq.isEmpty()) {
+      int[] element = pq.remove();
+      int curDist = element[0], curNode = element[1];
+      if (visited[curNode]) {
+        continue;
+      }
+      visited[curNode] = true;
+      result = curDist;
+      n -= 1;
+      if (map.containsKey(curNode)) {
+        for (int nextNode : map.get(curNode).keySet()) {
+          pq.add(new int[] {curDist + map.get(curNode).get(nextNode), nextNode});
+        }
+      }
+    }
+
+    return n == 0 ? result : -1;
+  }
 }

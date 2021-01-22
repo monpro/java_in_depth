@@ -167,4 +167,11 @@ public class ArrayUtilsTest {
     assertEquals(
         ArrayUtils.minimumCostForConnections(4, new int[][] {{1, 4, 5}, {1, 3, 6}, {3, 4, 1}}), -1);
   }
+
+  @Test
+  void getDelayTimeTest() {
+    assertEquals(
+            ArrayUtils.getDelayTime(new int[][]{{2, 1, 1}, {2, 3, 1}, {3, 4, 1}}, 4, 2), 2
+    );
+  }
 }
