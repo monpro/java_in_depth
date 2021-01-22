@@ -403,4 +403,18 @@ public class ArrayUtils {
     }
     return true;
   }
+
+  public static List<Integer> smallestSetOfStartingPoints(int n, List<List<Integer>> edges) {
+    List<Integer> result = new ArrayList<>();
+    int[] visited = new int[n];
+    for(List<Integer> edge: edges) {
+      visited[edge.get(1)] = 1;
+    }
+    for(int i = 0; i < n; i++) {
+      if(visited[i] == 0) {
+        result.add(i);
+      }
+    }
+    return result;
+  }
 }

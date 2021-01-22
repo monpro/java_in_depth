@@ -136,4 +136,15 @@ public class ArrayUtilsTest {
     assertEquals(ArrayUtils.bipartitionArrayTraverse(4, new int[][]{{1, 2}, {1, 3}, {2, 4}, {1, 4}}), false);
   }
 
+  @Test
+  void smallestSetOfStartingPointsTest() {
+    List<List<Integer>> edges = new ArrayList<>();
+    edges.add(new ArrayList<>(Arrays.asList(0, 1)));
+    edges.add(new ArrayList<>(Arrays.asList(0, 2)));
+    edges.add(new ArrayList<>(Arrays.asList(2, 5)));
+    edges.add(new ArrayList<>(Arrays.asList(3, 4)));
+    edges.add(new ArrayList<>(Arrays.asList(4, 2)));
+    assertEquals(ArrayUtils.smallestSetOfStartingPoints(6, edges).toString(), new ArrayList<>(Arrays.asList(0, 3)).toString());
+  }
+
 }
