@@ -311,4 +311,51 @@ public class ArrayUtils {
       }
       return result;
   }
+
+  public static boolean bipartitionArray(int N, int[][] differentGroup) {
+    // if we tried to do the partition
+    // then dislike[i] cannot be in same group
+    // we need to find the dislike mapping
+    // [1: {2, 3}]
+    Map<Integer, List<Integer>> mapping = new HashMap<>();
+    for(int i = 1; i <= N; i++) {
+      mapping.put(i, new ArrayList<Integer>());
+    }
+
+    for(int[] dislike: differentGroup) {
+      int dislikeFront = dislike[0], dislikeEnd = dislike[1];
+      List<Integer> frontList = mapping.get(dislikeFront);
+      List<Integer> endList = mapping.get(dislikeEnd);
+      frontList.add(dislikeEnd);
+      endList.add(dislikeFront);
+      mapping.put(dislikeFront, frontList);
+      mapping.put(dislikeEnd, endList);
+    }
+    // 1 means first group
+    // -1 means second group
+    int[] group = new int[N + 1];
+    for(int i = 1; i < N; i++) {
+      if(group[i] == 0 && !dfs(mapping, group, i, -1)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  public static boolean dfs(Map<Integer, List<Integer>> mapping, int[] group, int index, int color) {
+    if(group[index] == 0) {
+      group[index] = color;
+      int anotherColor = color == -1 ? 1: -1;
+      for(int i: mapping.get(index)) {
+        if(!dfs(mapping, group, i, anotherColor)) {
+          return false;
+        }
+      }
+    } else {
+      if(group[index] != color) {
+        return false;
+      }
+    }
+    return true;
+  }
 }

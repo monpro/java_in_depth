@@ -124,4 +124,12 @@ public class ArrayUtilsTest {
             new ArrayList<Long>(Arrays.asList(9L, 12L, 14L)).toString()
             );
   }
+
+  @Test
+  void bipartitionArrayTest() {
+    assertEquals(ArrayUtils.bipartitionArray(4, new int[][]{{1, 2}, {1, 3}, {2, 4}}), true);
+    assertEquals(ArrayUtils.bipartitionArray(4, new int[][]{{1, 2}, {1, 3}}), true);
+    assertEquals(ArrayUtils.bipartitionArray(4, new int[][]{{1, 2}, {1, 3}, {2, 4}, {1, 4}}), false);
+  }
+
 }
