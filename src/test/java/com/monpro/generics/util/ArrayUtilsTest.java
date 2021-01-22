@@ -71,31 +71,31 @@ public class ArrayUtilsTest {
 
   @Test
   void maxPointsOnSameLineTest() {
-      Point[] points = new Point[4];
-      points[0] = new Point(1, 2);
-      points[1] = new Point(3, 6);
-      points[2] = new Point(0, 0);
-      points[3] = new Point(1, 3);
+    Point[] points = new Point[4];
+    points[0] = new Point(1, 2);
+    points[1] = new Point(3, 6);
+    points[2] = new Point(0, 0);
+    points[3] = new Point(1, 3);
 
-      assertEquals(ArrayUtils.maxPointsOnSameLine(points), 3);
+    assertEquals(ArrayUtils.maxPointsOnSameLine(points), 3);
   }
 
   @Test
   void minimumPointsCombineArrayTest() {
-      List<Integer> list = new ArrayList<>(Arrays.asList(3, 7, 5, 12, 18, 4));
-      assertEquals(ArrayUtils.minimumPointsCombineArray(list), 117);
+    List<Integer> list = new ArrayList<>(Arrays.asList(3, 7, 5, 12, 18, 4));
+    assertEquals(ArrayUtils.minimumPointsCombineArray(list), 117);
   }
 
   @Test
   void throwCountTest() {
-      float[] bags = new float[]{1.01f,2.21f,1.30f};
-      assertEquals(ArrayUtils.throwCount(bags, 3.00f), 2);
+    float[] bags = new float[] {1.01f, 2.21f, 1.30f};
+    assertEquals(ArrayUtils.throwCount(bags, 3.00f), 2);
   }
 
   @Test
   void canPartitionTest() {
-      int[] num = new int[]{2, 4, 5, 3, 3, 9, 2, 2, 2};
-      assertEquals(ArrayUtils.canPartition(num), true);
+    int[] num = new int[] {2, 4, 5, 3, 3, 9, 2, 2, 2};
+    assertEquals(ArrayUtils.canPartition(num), true);
   }
 
   @Test
@@ -104,11 +104,12 @@ public class ArrayUtilsTest {
         ArrayUtils.convertToPostfixNotation(new String[] {"3", "-", "4", "+", "5"}).toString(),
         new ArrayList<>(Arrays.asList("3", "4", "-", "5", "+")).toString());
     assertEquals(
-            ArrayUtils.convertToPostfixNotation(new String[] {"(", "3", "-", "4", ")", "*", "5"}).toString(),
-            new ArrayList<>(Arrays.asList("3", "4", "-", "5", "*")).toString());
+        ArrayUtils.convertToPostfixNotation(new String[] {"(", "3", "-", "4", ")", "*", "5"})
+            .toString(),
+        new ArrayList<>(Arrays.asList("3", "4", "-", "5", "*")).toString());
     assertEquals(
-            ArrayUtils.convertToPostfixNotation(new String[] {"3", "-", "4", "*", "5"}).toString(),
-            new ArrayList<>(Arrays.asList("3", "4", "5", "*", "-")).toString());
+        ArrayUtils.convertToPostfixNotation(new String[] {"3", "-", "4", "*", "5"}).toString(),
+        new ArrayList<>(Arrays.asList("3", "4", "5", "*", "-")).toString());
   }
 
   @Test
@@ -119,21 +120,25 @@ public class ArrayUtilsTest {
 
     assertEquals(
         ArrayUtils.getSumOfIntervals(
-            new int[] {1, 2, 3, 4, 5},
-            new ArrayList<Interval>(Arrays.asList(interval1, interval2, interval3))).toString(),
-            new ArrayList<Long>(Arrays.asList(9L, 12L, 14L)).toString()
-            );
+                new int[] {1, 2, 3, 4, 5},
+                new ArrayList<Interval>(Arrays.asList(interval1, interval2, interval3)))
+            .toString(),
+        new ArrayList<Long>(Arrays.asList(9L, 12L, 14L)).toString());
   }
 
   @Test
   void bipartitionArrayTest() {
-    assertEquals(ArrayUtils.bipartitionArray(4, new int[][]{{1, 2}, {1, 3}, {2, 4}}), true);
-    assertEquals(ArrayUtils.bipartitionArray(4, new int[][]{{1, 2}, {1, 3}}), true);
-    assertEquals(ArrayUtils.bipartitionArray(4, new int[][]{{1, 2}, {1, 3}, {2, 4}, {1, 4}}), false);
+    assertEquals(ArrayUtils.bipartitionArray(4, new int[][] {{1, 2}, {1, 3}, {2, 4}}), true);
+    assertEquals(ArrayUtils.bipartitionArray(4, new int[][] {{1, 2}, {1, 3}}), true);
+    assertEquals(
+        ArrayUtils.bipartitionArray(4, new int[][] {{1, 2}, {1, 3}, {2, 4}, {1, 4}}), false);
 
-    assertEquals(ArrayUtils.bipartitionArrayTraverse(4, new int[][]{{1, 2}, {1, 3}, {2, 4}}), true);
-    assertEquals(ArrayUtils.bipartitionArrayTraverse(4, new int[][]{{1, 2}, {1, 3}}), true);
-    assertEquals(ArrayUtils.bipartitionArrayTraverse(4, new int[][]{{1, 2}, {1, 3}, {2, 4}, {1, 4}}), false);
+    assertEquals(
+        ArrayUtils.bipartitionArrayTraverse(4, new int[][] {{1, 2}, {1, 3}, {2, 4}}), true);
+    assertEquals(ArrayUtils.bipartitionArrayTraverse(4, new int[][] {{1, 2}, {1, 3}}), true);
+    assertEquals(
+        ArrayUtils.bipartitionArrayTraverse(4, new int[][] {{1, 2}, {1, 3}, {2, 4}, {1, 4}}),
+        false);
   }
 
   @Test
@@ -144,13 +149,22 @@ public class ArrayUtilsTest {
     edges.add(new ArrayList<>(Arrays.asList(2, 5)));
     edges.add(new ArrayList<>(Arrays.asList(3, 4)));
     edges.add(new ArrayList<>(Arrays.asList(4, 2)));
-    assertEquals(ArrayUtils.smallestSetOfStartingPoints(6, edges).toString(), new ArrayList<>(Arrays.asList(0, 3)).toString());
+    assertEquals(
+        ArrayUtils.smallestSetOfStartingPoints(6, edges).toString(),
+        new ArrayList<>(Arrays.asList(0, 3)).toString());
   }
 
   @Test
   void isPossibleEquationsTest() {
-      assertEquals(ArrayUtils.isPossibleEquations(new String[]{"a==b", "b!=a"}), false);
-      assertEquals(ArrayUtils.isPossibleEquations(new String[]{"a==b", "b==a"}), true);
+    assertEquals(ArrayUtils.isPossibleEquations(new String[] {"a==b", "b!=a"}), false);
+    assertEquals(ArrayUtils.isPossibleEquations(new String[] {"a==b", "b==a"}), true);
   }
 
+  @Test
+  void minimumCostForConnectionsTest() {
+    assertEquals(
+        ArrayUtils.minimumCostForConnections(3, new int[][] {{1, 2, 5}, {1, 3, 6}, {2, 3, 1}}), 6);
+    assertEquals(
+        ArrayUtils.minimumCostForConnections(4, new int[][] {{1, 4, 5}, {1, 3, 6}, {3, 4, 1}}), -1);
+  }
 }

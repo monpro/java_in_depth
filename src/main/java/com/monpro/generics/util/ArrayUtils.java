@@ -437,6 +437,27 @@ public class ArrayUtils {
     return true;
   }
 
+  public static int minimumCostForConnections(int N, int[][] connections) {
+    int result = 0, numOfNodes = N;
+    Arrays.sort(connections, (a, b) -> a[2] - b[2]);
+    int[] parent = new int[N];
+    for (int i = 0; i < N; i++) {
+      parent[i] = i;
+    }
+
+    for (int[] connection : connections) {
+      int start = connection[0] - 1, end = connection[1] - 1;
+      int startParent = find(start, parent), endParent = find(end, parent);
+      if (startParent != endParent) {
+        parent[startParent] = endParent;
+        numOfNodes -= 1;
+        result += connection[2];
+      }
+    }
+
+    return numOfNodes == 1 ? result : -1;
+  }
+
   public static int find(int x, int[] parent) {
     if (x != parent[x]) {
       parent[x] = find(parent[x], parent);
