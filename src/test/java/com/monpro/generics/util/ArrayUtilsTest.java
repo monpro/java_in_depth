@@ -147,4 +147,10 @@ public class ArrayUtilsTest {
     assertEquals(ArrayUtils.smallestSetOfStartingPoints(6, edges).toString(), new ArrayList<>(Arrays.asList(0, 3)).toString());
   }
 
+  @Test
+  void isPossibleEquationsTest() {
+      assertEquals(ArrayUtils.isPossibleEquations(new String[]{"a==b", "b!=a"}), false);
+      assertEquals(ArrayUtils.isPossibleEquations(new String[]{"a==b", "b==a"}), true);
+  }
+
 }

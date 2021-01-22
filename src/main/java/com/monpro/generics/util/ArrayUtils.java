@@ -3,11 +3,12 @@ package com.monpro.generics.util;
 import java.util.*;
 
 class Interval {
-    int start, end;
-    Interval(int start, int end) {
-        this.start = start;
-        this.end = end;
-    }
+  int start, end;
+
+  Interval(int start, int end) {
+    this.start = start;
+    this.end = end;
+  }
 }
 
 public class ArrayUtils {
@@ -153,12 +154,12 @@ public class ArrayUtils {
     }
     int result = 0;
     Map<String, Integer> count = new HashMap<>();
-    for(int i = 0; i < points.length; i++) {
+    for (int i = 0; i < points.length; i++) {
       count.clear();
       int sameLine = 0, vertical = 0, overlap = 0;
-      for(int j = i + 1; j < points.length; j++) {
-        if(points[j].x == points[i].x) {
-          if(points[j].y == points[i].y) {
+      for (int j = i + 1; j < points.length; j++) {
+        if (points[j].x == points[i].x) {
+          if (points[j].y == points[i].y) {
             overlap += 1;
           } else {
             vertical += 1;
@@ -176,7 +177,6 @@ public class ArrayUtils {
       }
       sameLine = Math.max(sameLine, vertical);
       result = Math.max(result, sameLine + overlap + 1);
-
     }
     return result;
   }
@@ -188,14 +188,15 @@ public class ArrayUtils {
       return getGcd(b, a % b);
     }
   }
+
   public static int minimumPointsCombineArray(List<Integer> sticks) {
     // write your code here
     PriorityQueue<Integer> queue = new PriorityQueue<>();
-    for(Integer stick: sticks) {
+    for (Integer stick : sticks) {
       queue.add(stick);
     }
     int result = 0;
-    while(queue.size() > 1) {
+    while (queue.size() > 1) {
       Integer stick = queue.poll();
       stick += queue.poll();
       result += stick;
@@ -209,13 +210,13 @@ public class ArrayUtils {
     int result = 0;
     Arrays.sort(bags);
 
-    while(left <= right) {
-      while(left < right && bags[left] + bags[right] > limit) {
+    while (left <= right) {
+      while (left < right && bags[left] + bags[right] > limit) {
         right -= 1;
         result += 1;
       }
 
-      if(left == right || bags[left] + bags[right] <= limit) {
+      if (left == right || bags[left] + bags[right] <= limit) {
         right -= 1;
         left += 1;
         result += 1;
@@ -233,8 +234,7 @@ public class ArrayUtils {
       prefix_sum.put(prefix, i);
     }
     int total = 0;
-    for (int n : nums)
-      total += n;
+    for (int n : nums) total += n;
     for (int i = nums.length - 2; i >= 3; i--) {
       if (prefix_sum.containsKey(suffix) && prefix_sum.get(suffix) <= i - 2) {
         int mid = total - 2 * suffix - nums[i] - nums[prefix_sum.get(suffix)];
@@ -253,20 +253,17 @@ public class ArrayUtils {
     List<String> result = new ArrayList<>();
     Stack<String> stack = new Stack<>();
 
-    for(String str: expression) {
+    for (String str : expression) {
       if (str.equals("(")) {
         stack.push(str);
-      }
-      else if (str.equals(")")) {
+      } else if (str.equals(")")) {
         while (!stack.peek().equals("(")) {
           result.add(stack.pop());
         }
         stack.pop();
-      }
-      else if(Character.isDigit(str.charAt(0))) {
+      } else if (Character.isDigit(str.charAt(0))) {
         result.add(str);
-      }
-      else {
+      } else {
         // stack only includes symbols
         // we need to add the symbol with highest priority first
         while (!stack.isEmpty() && getPriority(stack.peek()) >= getPriority(str)) {
@@ -286,30 +283,31 @@ public class ArrayUtils {
   private static int getPriority(String str) {
     if (str.equals("*") || str.equals("/")) {
       return 3;
-    } else if(str.equals("+") || str.equals("-")) {
+    } else if (str.equals("+") || str.equals("-")) {
       return 2;
-    } else if(str.equals("(")) {
+    } else if (str.equals("(")) {
       return 1;
-    } return 0;
+    }
+    return 0;
   }
 
   public static List<Long> getSumOfIntervals(int[] nums, List<Interval> intervals) {
-      List<Long> result = new ArrayList<>();
-      if(intervals == null || intervals.size() == 0 || nums == null || nums.length == 0) {
-          return result;
-      }
-      long[] prefixSum = new long[nums.length + 1];
-      long prefix = 0;
-      for(int i = 1; i < nums.length + 1; i++) {
-          prefix += nums[i - 1];
-          prefixSum[i] = prefix;
-      }
-      for(Interval interval: intervals) {
-          int start = interval.start;
-          int end = interval.end;
-          result.add(prefixSum[end + 1] - prefixSum[start]);
-      }
+    List<Long> result = new ArrayList<>();
+    if (intervals == null || intervals.size() == 0 || nums == null || nums.length == 0) {
       return result;
+    }
+    long[] prefixSum = new long[nums.length + 1];
+    long prefix = 0;
+    for (int i = 1; i < nums.length + 1; i++) {
+      prefix += nums[i - 1];
+      prefixSum[i] = prefix;
+    }
+    for (Interval interval : intervals) {
+      int start = interval.start;
+      int end = interval.end;
+      result.add(prefixSum[end + 1] - prefixSum[start]);
+    }
+    return result;
   }
 
   public static boolean bipartitionArray(int N, int[][] differentGroup) {
@@ -318,11 +316,11 @@ public class ArrayUtils {
     // we need to find the dislike mapping
     // [1: {2, 3}]
     Map<Integer, List<Integer>> mapping = new HashMap<>();
-    for(int i = 1; i <= N; i++) {
+    for (int i = 1; i <= N; i++) {
       mapping.put(i, new ArrayList<Integer>());
     }
 
-    for(int[] dislike: differentGroup) {
+    for (int[] dislike : differentGroup) {
       int dislikeFront = dislike[0], dislikeEnd = dislike[1];
       List<Integer> frontList = mapping.get(dislikeFront);
       List<Integer> endList = mapping.get(dislikeEnd);
@@ -334,25 +332,26 @@ public class ArrayUtils {
     // 1 means first group
     // -1 means second group
     int[] group = new int[N + 1];
-    for(int i = 1; i < N; i++) {
-      if(group[i] == 0 && !dfs(mapping, group, i, -1)) {
+    for (int i = 1; i < N; i++) {
+      if (group[i] == 0 && !dfs(mapping, group, i, -1)) {
         return false;
       }
     }
     return true;
   }
 
-  public static boolean dfs(Map<Integer, List<Integer>> mapping, int[] group, int index, int color) {
-    if(group[index] == 0) {
+  public static boolean dfs(
+      Map<Integer, List<Integer>> mapping, int[] group, int index, int color) {
+    if (group[index] == 0) {
       group[index] = color;
-      int anotherColor = color == -1 ? 1: -1;
-      for(int i: mapping.get(index)) {
-        if(!dfs(mapping, group, i, anotherColor)) {
+      int anotherColor = color == -1 ? 1 : -1;
+      for (int i : mapping.get(index)) {
+        if (!dfs(mapping, group, i, anotherColor)) {
           return false;
         }
       }
     } else {
-      if(group[index] != color) {
+      if (group[index] != color) {
         return false;
       }
     }
@@ -365,11 +364,11 @@ public class ArrayUtils {
     // we need to find the dislike mapping
     // [1: {2, 3}]
     Map<Integer, List<Integer>> mapping = new HashMap<>();
-    for(int i = 1; i <= N; i++) {
+    for (int i = 1; i <= N; i++) {
       mapping.put(i, new ArrayList<Integer>());
     }
 
-    for(int[] dislike: differentGroup) {
+    for (int[] dislike : differentGroup) {
       int dislikeFront = dislike[0], dislikeEnd = dislike[1];
       List<Integer> frontList = mapping.get(dislikeFront);
       List<Integer> endList = mapping.get(dislikeEnd);
@@ -381,19 +380,19 @@ public class ArrayUtils {
     // 1 means first group
     // -1 means second group
     int[] group = new int[N + 1];
-    for(int i = 1; i <= N; i++) {
-      if(group[i] == 0) {
+    for (int i = 1; i <= N; i++) {
+      if (group[i] == 0) {
         group[i] = -1;
         Queue<Integer> queue = new LinkedList<>();
         queue.add(i);
         while (!queue.isEmpty()) {
           int node = queue.poll();
-          for(int dislike: mapping.get(node)) {
-            if(group[dislike] == 0) {
-              group[dislike] = group[node] == 1 ? -1: 1;
+          for (int dislike : mapping.get(node)) {
+            if (group[dislike] == 0) {
+              group[dislike] = group[node] == 1 ? -1 : 1;
               queue.offer(dislike);
             } else {
-              if(group[dislike] == group[node]) {
+              if (group[dislike] == group[node]) {
                 return false;
               }
             }
@@ -407,14 +406,41 @@ public class ArrayUtils {
   public static List<Integer> smallestSetOfStartingPoints(int n, List<List<Integer>> edges) {
     List<Integer> result = new ArrayList<>();
     int[] visited = new int[n];
-    for(List<Integer> edge: edges) {
+    for (List<Integer> edge : edges) {
       visited[edge.get(1)] = 1;
     }
-    for(int i = 0; i < n; i++) {
-      if(visited[i] == 0) {
+    for (int i = 0; i < n; i++) {
+      if (visited[i] == 0) {
         result.add(i);
       }
     }
     return result;
+  }
+
+  public static boolean isPossibleEquations(String[] equations) {
+    // when will a == b, b
+    int[] parent = new int[26];
+    for (int i = 0; i < 26; i++) {
+      parent[i] = i;
+    }
+    for (String equation : equations) {
+      if (equation.charAt(1) == '=') {
+        parent[find(equation.charAt(0) - 'a', parent)] = find(equation.charAt(3) - 'a', parent);
+      }
+    }
+    for (String equation : equations) {
+      if (equation.charAt(1) == '!'
+          && (find(equation.charAt(0) - 'a', parent) == find(equation.charAt(3) - 'a', parent))) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  public static int find(int x, int[] parent) {
+    if (x != parent[x]) {
+      parent[x] = find(parent[x], parent);
+    }
+    return parent[x];
   }
 }
