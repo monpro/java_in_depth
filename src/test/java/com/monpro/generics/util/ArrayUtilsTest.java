@@ -174,4 +174,10 @@ public class ArrayUtilsTest {
             ArrayUtils.getDelayTime(new int[][]{{2, 1, 1}, {2, 3, 1}, {3, 4, 1}}, 4, 2), 2
     );
   }
+
+  @Test
+  void isValidPathForStreetsTest() {
+    assertEquals(ArrayUtils.isValidPathForStreets(new int[][]{{2, 4, 3}, {6, 5, 2}}), true);
+    assertEquals(ArrayUtils.isValidPathForStreets(new int[][]{{1, 2, 1}, {6, 5, 2}}), false);
+  }
 }
