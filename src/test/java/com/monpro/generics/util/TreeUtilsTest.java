@@ -23,4 +23,15 @@ public class TreeUtilsTest {
         TreeUtils.buildExpressionTree(new String[] {"2", "*", "6", "-", "5"}).toString(),
         "symbol='-', left=symbol='*', left=symbol='2', left=null, right=null}, right=symbol='6', left=null, right=null}}, right=symbol='5', left=null, right=null}}");
   }
+
+  @Test
+  void maxDiffBetweenAncestorsAndNodeHelperTest() {
+    TreeNode root = new TreeNode(8);
+    root.left = new TreeNode(3);
+    root.left.left = new TreeNode(1);
+    root.left.right = new TreeNode(2);
+    root.right = new TreeNode(14);
+
+    assertEquals(TreeUtils.maxDiffBetweenAncestorsAndNode(root), 7);
+  }
 }

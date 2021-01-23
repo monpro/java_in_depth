@@ -115,4 +115,19 @@ public class TreeUtils {
     node.left = expressionTreeStack.pop();
     return node;
   }
+
+  public static int maxDiffBetweenAncestorsAndNode(TreeNode root) {
+    return maxDiffBetweenAncestorsAndNodeHelper(root, root.val, root.val);
+
+  }
+
+  private static int maxDiffBetweenAncestorsAndNodeHelper(TreeNode root, int maxValue, int minValue) {
+    if(root == null) {
+      return Math.abs(maxValue - minValue);
+    }
+    maxValue = Math.max(root.val, maxValue);
+    minValue = Math.min(root.val, minValue);
+
+    return Math.max(maxDiffBetweenAncestorsAndNodeHelper(root.left, maxValue, minValue), maxDiffBetweenAncestorsAndNodeHelper(root.right, maxValue, minValue));
+  }
 }
