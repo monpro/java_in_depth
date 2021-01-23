@@ -1,6 +1,6 @@
 package com.monpro.generics.util;
 
-import java.util.Stack;
+import java.util.*;
 
 class TreeNode {
   int val;
@@ -118,16 +118,52 @@ public class TreeUtils {
 
   public static int maxDiffBetweenAncestorsAndNode(TreeNode root) {
     return maxDiffBetweenAncestorsAndNodeHelper(root, root.val, root.val);
-
   }
 
-  private static int maxDiffBetweenAncestorsAndNodeHelper(TreeNode root, int maxValue, int minValue) {
-    if(root == null) {
+  private static int maxDiffBetweenAncestorsAndNodeHelper(
+      TreeNode root, int maxValue, int minValue) {
+    if (root == null) {
       return Math.abs(maxValue - minValue);
     }
     maxValue = Math.max(root.val, maxValue);
     minValue = Math.min(root.val, minValue);
 
-    return Math.max(maxDiffBetweenAncestorsAndNodeHelper(root.left, maxValue, minValue), maxDiffBetweenAncestorsAndNodeHelper(root.right, maxValue, minValue));
+    return Math.max(
+        maxDiffBetweenAncestorsAndNodeHelper(root.left, maxValue, minValue),
+        maxDiffBetweenAncestorsAndNodeHelper(root.right, maxValue, minValue));
+  }
+
+  public static List<TreeNode> deleteNodes(TreeNode root, int[] deleteNodeValues) {
+    List<TreeNode> result = new ArrayList<>();
+    Set<Integer> set = new HashSet<>();
+    for (int node : deleteNodeValues) {
+      set.add(node);
+    }
+    if (!set.contains(root.val)) {
+      result.add(root);
+    }
+    deleteNodesHelper(root, set, result);
+    return result;
+  }
+
+  private static TreeNode deleteNodesHelper(
+      TreeNode root, Set<Integer> set, List<TreeNode> result) {
+    if (root == null) {
+      return null;
+    }
+
+    root.left = deleteNodesHelper(root.left, set, result);
+    root.right = deleteNodesHelper(root.right, set, result);
+
+    if (set.contains(root.val)) {
+      if (root.left != null) {
+        result.add(root.left);
+      }
+      if (root.right != null) {
+        result.add(root.right);
+      }
+      return null;
+    }
+    return root;
   }
 }
