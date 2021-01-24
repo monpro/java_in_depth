@@ -20,6 +20,8 @@ class TreeNode {
   }
 }
 
+
+
 class AverageNode {
   double val;
   int count;
@@ -165,5 +167,41 @@ public class TreeUtils {
       return null;
     }
     return root;
+  }
+
+  public static TreeNode treeToSortedDoublyListTest(TreeNode root) {
+    // then link together
+    if(root == null) {
+      return null;
+    }
+
+    TreeNode leftNode = treeToSortedDoublyListTest(root.left);
+    TreeNode rightNode = treeToSortedDoublyListTest(root.right);
+
+    root.left = root;
+    root.right = root;
+
+    return merge(merge(leftNode, root), rightNode);
+  }
+
+  private static TreeNode merge(TreeNode leftNode, TreeNode rightNode) {
+    if(leftNode == null) {
+      return rightNode;
+    }
+    if(rightNode == null) {
+      return leftNode;
+    }
+
+    TreeNode leftTail = leftNode.left;
+    TreeNode rightTail = rightNode.left;
+
+    leftTail.right = rightNode;
+    rightNode.left = leftTail;
+
+    rightTail.right = leftNode;
+    leftNode.left = rightTail;
+
+    return leftNode;
+
   }
 }

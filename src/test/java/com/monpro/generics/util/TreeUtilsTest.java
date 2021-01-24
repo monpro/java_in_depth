@@ -55,4 +55,18 @@ public class TreeUtilsTest {
     assertEquals(list.get(2).val, 7);
   }
 
+  @Test
+  void treeToSortedDoublyListTest(){
+    TreeNode root = new TreeNode(4);
+    root.left = new TreeNode(2);
+    root.left.left = new TreeNode(1);
+    root.left.right = new TreeNode(3);
+    root.right = new TreeNode(5);
+
+    TreeNode sortedRoot = TreeUtils.treeToSortedDoublyListTest(root);
+    assertEquals(sortedRoot.val, 1);
+    assertEquals(sortedRoot.left.val, 5);
+    assertEquals(sortedRoot.right.val, 2);
+
+  }
 }
