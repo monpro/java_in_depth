@@ -1,5 +1,7 @@
 package com.monpro.generics.util;
 
+import javafx.util.Pair;
+
 import java.util.*;
 
 class TreeNode {
@@ -19,8 +21,6 @@ class TreeNode {
     this.right = right;
   }
 }
-
-
 
 class AverageNode {
   double val;
@@ -171,7 +171,7 @@ public class TreeUtils {
 
   public static TreeNode treeToSortedDoublyListTest(TreeNode root) {
     // then link together
-    if(root == null) {
+    if (root == null) {
       return null;
     }
 
@@ -181,14 +181,15 @@ public class TreeUtils {
     root.left = root;
     root.right = root;
 
-    return treeToSortedDoublyListTestMerge(treeToSortedDoublyListTestMerge(leftNode, root), rightNode);
+    return treeToSortedDoublyListTestMerge(
+        treeToSortedDoublyListTestMerge(leftNode, root), rightNode);
   }
 
   private static TreeNode treeToSortedDoublyListTestMerge(TreeNode leftNode, TreeNode rightNode) {
-    if(leftNode == null) {
+    if (leftNode == null) {
       return rightNode;
     }
-    if(rightNode == null) {
+    if (rightNode == null) {
       return leftNode;
     }
 
@@ -202,21 +203,42 @@ public class TreeUtils {
     leftNode.left = rightTail;
 
     return leftNode;
-
   }
 
-    public static TreeNode flipTreeUpsideDown(TreeNode root) {
-        if(root == null || root.left == null) {
-            return root;
-        }
-
-        TreeNode newRoot = flipTreeUpsideDown(root.left);
-        root.left.left = root.right;
-        root.left.right = root;
-
-        root.left = null;
-        root.right = null;
-
-        return newRoot;
+  public static TreeNode flipTreeUpsideDown(TreeNode root) {
+    if (root == null || root.left == null) {
+      return root;
     }
+
+    TreeNode newRoot = flipTreeUpsideDown(root.left);
+    root.left.left = root.right;
+    root.left.right = root;
+
+    root.left = null;
+    root.right = null;
+
+    return newRoot;
+  }
+
+  public static TreeNode deepestSubTree(TreeNode root) {
+    return deepestSubTreeHelper(root).getValue();
+  }
+
+  private static Pair<Integer, TreeNode> deepestSubTreeHelper(TreeNode root) {
+    if(root == null) {
+      return new Pair<>(0, null);
+    }
+
+    Pair<Integer, TreeNode> leftPair = deepestSubTreeHelper(root.left);
+    Pair<Integer, TreeNode> rightPair = deepestSubTreeHelper(root.right);
+
+    int leftHeight = leftPair.getKey(), rightHeight = rightPair.getKey();
+    if(leftHeight == rightHeight) {
+      return new Pair<>(leftHeight + 1, root);
+    } else if(leftHeight > rightHeight) {
+      return new Pair<>(leftHeight + 1, leftPair.getValue());
+    } else {
+      return new Pair<>(rightHeight + 1, rightPair.getValue());
+    }
+  }
 }

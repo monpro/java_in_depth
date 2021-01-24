@@ -81,4 +81,20 @@ public class TreeUtilsTest {
     assertEquals(newRoot.left.val, 3);
     assertEquals(newRoot.right.val, 1);
   }
+
+  @Test
+  void deepestSubTreeTest() {
+    TreeNode root = new TreeNode(1);
+    root.left = new TreeNode(2);
+    root.left.left = new TreeNode(4);
+    root.left.right = new TreeNode(5);
+    root.left.left.left = new TreeNode(9);
+    root.left.left.right = new TreeNode(10);
+    root.right = new TreeNode(3);
+    root.right.left = new TreeNode(6);
+    root.right.right = new TreeNode(7);
+
+
+    assertEquals(TreeUtils.deepestSubTree(root).val, 4);
+  }
 }
