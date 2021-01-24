@@ -69,4 +69,16 @@ public class TreeUtilsTest {
     assertEquals(sortedRoot.right.val, 2);
 
   }
+
+  @Test
+  void flipTreeUpsideDownTest() {
+    TreeNode root = new TreeNode(1);
+    root.left = new TreeNode(2);
+    root.right = new TreeNode(3);
+
+    TreeNode newRoot = TreeUtils.flipTreeUpsideDown(root);
+    assertEquals(newRoot.val, 2);
+    assertEquals(newRoot.left.val, 3);
+    assertEquals(newRoot.right.val, 1);
+  }
 }

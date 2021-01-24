@@ -181,10 +181,10 @@ public class TreeUtils {
     root.left = root;
     root.right = root;
 
-    return merge(merge(leftNode, root), rightNode);
+    return treeToSortedDoublyListTestMerge(treeToSortedDoublyListTestMerge(leftNode, root), rightNode);
   }
 
-  private static TreeNode merge(TreeNode leftNode, TreeNode rightNode) {
+  private static TreeNode treeToSortedDoublyListTestMerge(TreeNode leftNode, TreeNode rightNode) {
     if(leftNode == null) {
       return rightNode;
     }
@@ -204,4 +204,19 @@ public class TreeUtils {
     return leftNode;
 
   }
+
+    public static TreeNode flipTreeUpsideDown(TreeNode root) {
+        if(root == null || root.left == null) {
+            return root;
+        }
+
+        TreeNode newRoot = flipTreeUpsideDown(root.left);
+        root.left.left = root.right;
+        root.left.right = root;
+
+        root.left = null;
+        root.right = null;
+
+        return newRoot;
+    }
 }
