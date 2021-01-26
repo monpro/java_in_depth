@@ -596,4 +596,52 @@ public class ArrayUtils {
     }
     return parents.get(email);
   }
+
+
+  public static int minCostToConnectPoints(int[][] points) {
+
+    int m = points.length;
+    int result = 0, island = m;
+    int[] parents = new int[m];
+    for(int i = 0; i < m; i++) {
+      parents[i] = i;
+    }
+    int[][] dist = new int[m][m];
+    PriorityQueue<int[]> queue = new PriorityQueue<>((a, b) -> dist[a[0]][a[1]] - dist[b[0]][b[1]]);
+
+    for(int i = 0; i < m; i++) {
+      for(int j = 1; j < m; j++) {
+        dist[i][j] = Math.abs(points[i][0] - points[j][0]) + Math.abs(points[i][1] - points[j][1]);
+        queue.offer(new int[]{i, j});
+      }
+    }
+
+    while(!queue.isEmpty() && island > 1) {
+      int[] node = queue.poll();
+      if(pointsUnion(node[0], node[1], parents)) {
+        result += dist[node[0]][node[1]];
+        island -= 1;
+      }
+    }
+    return result;
+  }
+
+  private static boolean pointsUnion(int node1, int node2, int[] parents) {
+    int p1 = pointsFind(node1, parents);
+    int p2 = pointsFind(node2, parents);
+    if(p1 == p2) {
+      return false;
+    }
+    parents[p1] = p2;
+    return true;
+  }
+
+  private static int pointsFind(int node, int[] parents) {
+    int parent = parents[node];
+    if(parent == node) {
+      return parent;
+    }
+    parents[node] = pointsFind(parent, parents);
+    return parents[node];
+  }
 }
