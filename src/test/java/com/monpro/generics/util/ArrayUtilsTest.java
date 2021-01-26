@@ -180,4 +180,18 @@ public class ArrayUtilsTest {
     assertEquals(ArrayUtils.isValidPathForStreets(new int[][]{{2, 4, 3}, {6, 5, 2}}), true);
     assertEquals(ArrayUtils.isValidPathForStreets(new int[][]{{1, 2, 1}, {6, 5, 2}}), false);
   }
+
+  @Test
+  void sumOddLengthArrayTest(){
+    assertEquals(ArrayUtils.sumOddLengthArray(new int[]{1, 2, 3, 4, 5}), 57);
+    assertEquals(ArrayUtils.sumOddLengthArray(new int[]{}), 0);
+    assertEquals(ArrayUtils.sumOddLengthArray(new int[]{1, 2, 3, 4, 55}), 207);
+  }
+
+  @Test
+  void sumEvenLengthArrayTest() {
+    assertEquals(ArrayUtils.sumEvenLengthArray(new int[]{1, 2, 3, 4, 5}), 48);
+    assertEquals(ArrayUtils.sumEvenLengthArray(new int[]{}), 0);
+    assertEquals(ArrayUtils.sumEvenLengthArray(new int[]{1, 2, 3, 4, 55}), 148);
+  }
 }

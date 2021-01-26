@@ -748,4 +748,12 @@ public class ArrayUtils {
       }
       return result;
     }
+
+  public static int sumEvenLengthArray(int[] arr) {
+    int result = 0, n = arr.length;
+    for(int i = 0; i < n; i++) {
+      result += ((n - i) * (i + 1)) / 2 * arr[i];
+    }
+    return result;
+  }
 }
