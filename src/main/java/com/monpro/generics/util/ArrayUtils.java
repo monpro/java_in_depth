@@ -542,4 +542,58 @@ public class ArrayUtils {
     }
     return false;
   }
+
+
+  public static List<List<String>> accountsMerge(List<List<String>> accounts) {
+    // for each email we need to know it's owner
+    // for each email we need to konw it's parent
+    // after that we need to iterate all emails
+    // parent is key
+    // email in sorted order TreeSet<>();
+
+
+    Map<String, String> owner = new HashMap<>();
+    Map<String, String> parents = new HashMap<>();
+    Map<String, TreeSet<String>> unions = new HashMap<>();
+    List<List<String>> result = new ArrayList<>();
+
+    for(List<String> list: accounts) {
+      for(int i = 1; i < list.size(); i++) {
+        parents.put(list.get(i), list.get(i));
+        owner.put(list.get(i), list.get(0));
+      }
+    }
+    for(List<String> list: accounts) {
+      String parent = accountFind(list.get(1), parents);
+      for(int i = 2; i < list.size(); i++) {
+        parents.put(accountFind(list.get(i), parents), parent);
+      }
+    }
+    // finish the find then try to union
+    // list.get(1) is the parent of all remaining elements in list
+    for(List<String> list: accounts) {
+      String parent = accountFind(list.get(1), parents);
+      unions.putIfAbsent(parent, new TreeSet<>());
+      for(int i = 1; i < list.size(); i++) {
+        unions.get(parent).add(list.get(i));
+      }
+    }
+
+    for(String parent: unions.keySet()) {
+      String name = owner.get(parent);
+      List<String> emails = new ArrayList<>(unions.get(parent));
+      emails.add(0, name);
+      result.add(emails);
+    }
+
+    return result;
+  }
+
+  private static String accountFind(String email, Map<String, String> parents) {
+    if(email != parents.get(email)) {
+      parents.put(email, accountFind(parents.get(email), parents));
+      return parents.get(email);
+    }
+    return parents.get(email);
+  }
 }
