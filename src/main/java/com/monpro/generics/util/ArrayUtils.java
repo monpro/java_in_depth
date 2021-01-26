@@ -756,4 +756,33 @@ public class ArrayUtils {
     }
     return result;
   }
+
+  public static String rankTeams(String[] votes) {
+    //for each team, we need to know it's all positions
+    Map<Character, int[]> count = new HashMap<>();
+    int n = votes[0].length();
+    for(String vote: votes) {
+      for(int i = 0; i < n; i++) {
+        char ch = vote.charAt(i);
+        count.putIfAbsent(ch, new int[n]);
+        count.get(ch)[i] += 1;
+      }
+    }
+    // then we need to sort all teams
+    List<Character> list = new ArrayList<>(count.keySet());
+    list.sort((a, b) -> {
+      for (int i = 0; i < n; i++) {
+        int countA = count.get(a)[i], countB = count.get(b)[i];
+        if (countA != countB) {
+          return countB - countA;
+        }
+      }
+      return a - b;
+    });
+    StringBuilder sb = new StringBuilder();
+    for(char ch: list) {
+      sb.append(ch);
+    }
+    return sb.toString();
+  }
 }

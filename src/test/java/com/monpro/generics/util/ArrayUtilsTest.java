@@ -194,4 +194,11 @@ public class ArrayUtilsTest {
     assertEquals(ArrayUtils.sumEvenLengthArray(new int[]{}), 0);
     assertEquals(ArrayUtils.sumEvenLengthArray(new int[]{1, 2, 3, 4, 55}), 148);
   }
+
+  @Test
+  void rankTeamsTest() {
+    assertEquals(ArrayUtils.rankTeams(new String[]{"ABC","ACB","ABC","ACB","ACB"}), "ACB");
+    assertEquals(ArrayUtils.rankTeams(new String[]{"WXYZ","XYZW"}), "XWYZ");
+    assertEquals(ArrayUtils.rankTeams(new String[]{"BCA","CAB","CBA","ABC","ACB","BAC"}), "ABC");
+  }
 }
