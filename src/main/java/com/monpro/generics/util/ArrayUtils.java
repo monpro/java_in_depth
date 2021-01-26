@@ -733,4 +733,19 @@ public class ArrayUtils {
         }
         return result;
     }
+
+    public static int sumOddLengthArray(int[] arr) {
+      // considering 1,2,3,4,5 of odd sub array
+      // 1 will be counted 3 times
+      // 2 will be counted 4 times
+      // 3 will be counted 5 times
+      // 4 will be counted 4 times
+      // 5 will be counted 3 times
+      // it following the rule of index i = ((n - i) * (i + 1) + 1) / 2
+      int result = 0, n = arr.length;
+      for(int i = 0; i < n; i++) {
+        result += ((n - i) * (i + 1) + 1) / 2 * arr[i];
+      }
+      return result;
+    }
 }
