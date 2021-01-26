@@ -644,4 +644,49 @@ public class ArrayUtils {
     parents[node] = pointsFind(parent, parents);
     return parents[node];
   }
+
+  public List<List<String>> accountsMergeDfs(List<List<String>> accounts) {
+    // build graph use dfs
+    // use visited to store visited node
+    // need to store mapping from email to name
+    List<List<String>> result = new ArrayList<>();
+    Map<String, Set<String>> graph = new HashMap<>();
+    Map<String, String> emailToName = new HashMap<>();
+    Set<String> visited = new HashSet<>();
+
+    for(List<String> list: accounts){
+      for(int i = 1; i < list.size(); i++){
+        emailToName.put(list.get(i), list.get(0));
+        graph.putIfAbsent(list.get(i), new HashSet<>());
+        if(i > 1) {
+          graph.get(list.get(i)).add(list.get(i - 1));
+          graph.get(list.get(i - 1)).add(list.get(i));
+        }
+      }
+    }
+
+    // iterate email to do dfs
+
+    for(String email: emailToName.keySet()) {
+      TreeSet<String> sortedList = new TreeSet<>();
+      if(!visited.contains(email)) {
+        visited.add(email);
+        accountsMergeDfsHelper(email, visited, sortedList, graph);
+        List<String> list = new ArrayList<>(sortedList);
+        list.add(0, emailToName.get(email));
+        result.add(list);
+      }
+    }
+    return result;
+  }
+
+  private static void accountsMergeDfsHelper(String email, Set<String> visited, TreeSet<String> list, Map<String, Set<String>> graph) {
+    list.add(email);
+    for(String neighbor: graph.get(email)) {
+      if(!visited.contains(neighbor)) {
+        visited.add(neighbor);
+        accountsMergeDfsHelper(neighbor, visited, list, graph);
+      }
+    }
+  }
 }
