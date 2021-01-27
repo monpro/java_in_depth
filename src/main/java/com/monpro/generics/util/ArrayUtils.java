@@ -785,4 +785,29 @@ public class ArrayUtils {
     }
     return sb.toString();
   }
+
+  public static int getMaxSubArrayWithPositiveProduct(int[] nums) {
+      int count = 0, result = 0, zeroIndex = -1, negativeIndex = -1;
+      for(int i = 0; i < nums.length; i++) {
+          if(nums[i] < 0) {
+              count += 1;
+              if(negativeIndex == -1) {
+                  negativeIndex = i;
+              }
+          }
+          if(nums[i] == 0) {
+              zeroIndex = i;
+              negativeIndex = -1;
+              count = 0;
+          } else {
+              // if we have even negative index
+              if(count % 2 == 0) {
+                  result = Math.max(result, i - zeroIndex);
+              } else {
+                  result = Math.max(result, i - negativeIndex);
+              }
+          }
+      }
+      return result;
+  }
 }

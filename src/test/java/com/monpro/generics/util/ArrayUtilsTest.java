@@ -201,4 +201,12 @@ public class ArrayUtilsTest {
     assertEquals(ArrayUtils.rankTeams(new String[]{"WXYZ","XYZW"}), "XWYZ");
     assertEquals(ArrayUtils.rankTeams(new String[]{"BCA","CAB","CBA","ABC","ACB","BAC"}), "ABC");
   }
+
+  @Test
+  void getMaxSubArrayWithPositiveProductTest() {
+    assertEquals(ArrayUtils.getMaxSubArrayWithPositiveProduct(new int[]{1,-2,-3,4}), 4);
+    assertEquals(ArrayUtils.getMaxSubArrayWithPositiveProduct(new int[]{0,1,-2,-3,-4}), 3);
+    assertEquals(ArrayUtils.getMaxSubArrayWithPositiveProduct(new int[]{-1,-2,-3,0,1}), 2);
+
+  }
 }
