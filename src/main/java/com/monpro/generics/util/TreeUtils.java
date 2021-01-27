@@ -241,4 +241,26 @@ public class TreeUtils {
       return new Pair<>(rightHeight + 1, rightPair.getValue());
     }
   }
+
+  public static List<Integer> nodeWithNoSibling(TreeNode root) {
+    List<Integer> result = new ArrayList<>();
+    lonelyNodesHelper(root, result);
+    return result;
+  }
+
+  private static void lonelyNodesHelper(TreeNode root, List<Integer> result) {
+    if(root.left == null && root.right == null) {
+      return;
+    }
+    if(root.left != null && root.right == null) {
+      result.add(root.left.val);
+      lonelyNodesHelper(root.left, result);
+    } else if(root.right != null && root.left == null) {
+      result.add(root.right.val);
+      lonelyNodesHelper(root.right, result);
+    } else {
+      lonelyNodesHelper(root.left, result);
+      lonelyNodesHelper(root.right, result);
+    }
+  }
 }

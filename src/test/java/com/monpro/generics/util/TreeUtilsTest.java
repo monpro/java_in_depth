@@ -2,9 +2,12 @@ package com.monpro.generics.util;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TreeUtilsTest {
 
@@ -48,7 +51,7 @@ public class TreeUtilsTest {
     root.right = new TreeNode(3);
     root.right.left = new TreeNode(6);
     root.right.right = new TreeNode(7);
-    List<TreeNode> list = TreeUtils.deleteNodes(root, new int[]{3, 5});
+    List<TreeNode> list = TreeUtils.deleteNodes(root, new int[] {3, 5});
     assertEquals(list.size(), 3);
     assertEquals(list.get(0).val, 1);
     assertEquals(list.get(1).val, 6);
@@ -56,7 +59,7 @@ public class TreeUtilsTest {
   }
 
   @Test
-  void treeToSortedDoublyListTest(){
+  void treeToSortedDoublyListTest() {
     TreeNode root = new TreeNode(4);
     root.left = new TreeNode(2);
     root.left.left = new TreeNode(1);
@@ -67,7 +70,6 @@ public class TreeUtilsTest {
     assertEquals(sortedRoot.val, 1);
     assertEquals(sortedRoot.left.val, 5);
     assertEquals(sortedRoot.right.val, 2);
-
   }
 
   @Test
@@ -94,7 +96,20 @@ public class TreeUtilsTest {
     root.right.left = new TreeNode(6);
     root.right.right = new TreeNode(7);
 
-
     assertEquals(TreeUtils.deepestSubTree(root).val, 4);
+  }
+
+  @Test
+  void nodeWithNoSiblingTest() {
+    TreeNode root = new TreeNode(1);
+    root.left = new TreeNode(2);
+    root.left.left = new TreeNode(4);
+    root.left.right = new TreeNode(5);
+    root.left.left.left = new TreeNode(9);
+    root.right = new TreeNode(3);
+    root.right.left = new TreeNode(6);
+    List<Integer> result = TreeUtils.nodeWithNoSibling(root);
+    List<Integer> list = new ArrayList<>(Arrays.asList(6, 9));
+    assertTrue(result.size() == list.size() && result.containsAll(list) && list.containsAll(result));
   }
 }
