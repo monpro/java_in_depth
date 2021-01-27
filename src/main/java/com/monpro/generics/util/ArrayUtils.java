@@ -810,4 +810,42 @@ public class ArrayUtils {
       }
       return result;
   }
+
+  public static int getMinCostFromOffers(List<Integer> price, List<List<Integer>> special, List<Integer> needs) {
+    Map<String, Integer> cache = new HashMap<>();
+    return shoppingOffersDfs(needs, price, special, 0, cache);
+  }
+
+  private static int shoppingOffersDfs(List<Integer> needs, List<Integer> price, List<List<Integer>> special, int index, Map<String, Integer> cache) {
+    // directly buying it
+    int minPrice = getDirectPrice(needs, price);
+    String key = needs.toString();
+    if(cache.containsKey(key)) {
+      return cache.get(key);
+    }
+    for(int i = index; i < special.size(); i++) {
+      List<Integer> offer = special.get(i);
+      List<Integer> curNeed = new ArrayList<>();
+      for(int j = 0; j < offer.size() - 1; j++) {
+        if(offer.get(j) > needs.get(j)) {
+          curNeed.clear();
+          break;
+        }
+        curNeed.add(j, needs.get(j) - offer.get(j));
+      }
+      if(!curNeed.isEmpty()){
+        minPrice = Math.min(minPrice, offer.get(offer.size() - 1) + shoppingOffersDfs(curNeed, price, special, index, cache));
+      }
+    }
+    cache.put(key, minPrice);
+    return minPrice;
+  }
+
+  private static int getDirectPrice(List<Integer> needs, List<Integer> price) {
+    int result = 0;
+    for(int i = 0; i < needs.size(); i++) {
+      result += needs.get(i) * price.get(i);
+    }
+    return result;
+  }
 }
