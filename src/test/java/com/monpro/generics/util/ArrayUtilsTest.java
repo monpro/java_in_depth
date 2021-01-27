@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ArrayUtilsTest {
@@ -207,6 +208,10 @@ public class ArrayUtilsTest {
     assertEquals(ArrayUtils.getMaxSubArrayWithPositiveProduct(new int[]{1,-2,-3,4}), 4);
     assertEquals(ArrayUtils.getMaxSubArrayWithPositiveProduct(new int[]{0,1,-2,-3,-4}), 3);
     assertEquals(ArrayUtils.getMaxSubArrayWithPositiveProduct(new int[]{-1,-2,-3,0,1}), 2);
+  }
 
+  @Test
+  void drawColorOnBorderTest() {
+    assertArrayEquals(ArrayUtils.drawColorOnBorder(new int[][]{{1, 1}, {1, 2}}, 0, 0, 3), new int[][]{{3, 3}, {3, 2}});
   }
 }

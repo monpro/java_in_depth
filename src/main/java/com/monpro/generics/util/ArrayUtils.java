@@ -848,4 +848,34 @@ public class ArrayUtils {
     }
     return result;
   }
+
+  public static int[][] drawColorOnBorder(int[][] grid, int r0, int c0, int color) {
+    // first come to my mind is bfs
+    int m = grid.length, n = grid[0].length;
+    boolean[][] visited = new boolean[m][n];
+    Queue<int[]> queue = new LinkedList<>();
+    int[][] directions = new int[][]{{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+    queue.add(new int[]{r0, c0});
+    List<int[]> border = new ArrayList<>();
+    while(!queue.isEmpty()) {
+      int[] node = queue.poll();
+      int x = node[0], y = node[1];
+      for(int[] direction: directions){
+        int nextX = x + direction[0];
+        int nextY = y + direction[1];
+        if(nextX >= 0 && nextX < m && nextY >= 0 && nextY < n && grid[nextX][nextY] == grid[x][y]) {
+          if(!visited[nextX][nextY]) {
+            visited[nextX][nextY] = true;
+            queue.add(new int[]{nextX, nextY});
+          }
+        } else {
+          border.add(new int[]{x, y});
+        }
+      }
+    }
+    for(int[] element: border) {
+      grid[element[0]][element[1]] = color;
+    }
+    return grid;
+  }
 }
