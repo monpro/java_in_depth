@@ -24,4 +24,10 @@ public class StringUtilsTest {
         assertEquals(StringUtils.firstUniChar("abbcac"), ' ');
         assertEquals(StringUtils.firstUniChar("abbefefgcc"), 'a');
     }
+
+    @Test
+    void maxNumberOfUniqueSubStringTest() {
+    assertEquals(StringUtils.maxNumberOfUniqueSubString("ababccc"), 5);
+    assertEquals(StringUtils.maxNumberOfUniqueSubString("abc"), 3);
+    }
 }

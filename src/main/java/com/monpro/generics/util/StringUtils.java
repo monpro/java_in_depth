@@ -1,5 +1,8 @@
 package com.monpro.generics.util;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class StringUtils {
     public static int maximumPoints(String s, int x, int y) {
         // first find a,b
@@ -89,5 +92,30 @@ public class StringUtils {
             }
         }
         return ' ';
+    }
+
+    public static int maxNumberOfUniqueSubString(String s) {
+        Set<String> set = new HashSet<>();
+        return maxNumberOfUniqueSubStringDfs(set, 0, s);
+    }
+
+    private static int maxNumberOfUniqueSubStringDfs(Set<String> set, int index, String s) {
+        if(index >= s.length()) {
+            return 0;
+        }
+        int result = -1;
+        for(int i = index + 1; i <= s.length(); i++) {
+            String uniqueString = s.substring(index, i);
+            if(set.contains(uniqueString)) {
+                continue;
+            }
+            set.add(uniqueString);
+            int nextNumber = maxNumberOfUniqueSubStringDfs(set, i, s);
+            if(nextNumber >= 0) {
+                result = Math.max(result, nextNumber + 1);
+            }
+            set.remove(uniqueString);
+        }
+        return result;
     }
 }
