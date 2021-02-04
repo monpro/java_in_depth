@@ -216,7 +216,11 @@ public class ArrayUtilsTest {
   }
 
   @Test
-  void numsSameDiffBfsTest() {
+  void numsSameDiffTest() {
+    for(int i = 2; i < 9; i++) {
+      assertArrayEquals(ArrayUtils.numsSameDiffBfs(i, 7), ArrayUtils.numsSameConsecDiffDfs(i, 7));
+    }
     assertArrayEquals(ArrayUtils.numsSameDiffBfs(3, 7), new int[]{181,292,707,818,929});
+    assertArrayEquals(ArrayUtils.numsSameConsecDiffDfs(3, 7), new int[]{181,292,707,818,929});
   }
 }
