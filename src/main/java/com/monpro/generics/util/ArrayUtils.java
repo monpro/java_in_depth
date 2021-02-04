@@ -878,4 +878,25 @@ public class ArrayUtils {
     }
     return grid;
   }
+
+  public static int[] numsSameDiffBfs(int n, int k) {
+    Queue<Integer> queue = new ArrayDeque<>(Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9));
+    while(n > 1) {
+      int size = queue.size();
+      for(int i = size; i > 0; i--) {
+        int num = queue.poll();
+        if (num > 0) {
+          int digit1 = num % 10 - k, digit2 = num % 10 + k;
+          if(digit1 >= 0) {
+            queue.offer(num * 10 + digit1);
+          }
+          if(digit2 < 10 && digit1 != digit2) {
+            queue.offer(num * 10 + digit2);
+          }
+        }
+      }
+      n -= 1;
+    }
+    return queue.stream().mapToInt(i -> i).toArray();
+  }
 }

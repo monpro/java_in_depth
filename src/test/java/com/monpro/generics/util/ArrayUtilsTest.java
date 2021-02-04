@@ -214,4 +214,9 @@ public class ArrayUtilsTest {
   void drawColorOnBorderTest() {
     assertArrayEquals(ArrayUtils.drawColorOnBorder(new int[][]{{1, 1}, {1, 2}}, 0, 0, 3), new int[][]{{3, 3}, {3, 2}});
   }
+
+  @Test
+  void numsSameDiffBfsTest() {
+    assertArrayEquals(ArrayUtils.numsSameDiffBfs(3, 7), new int[]{181,292,707,818,929});
+  }
 }
