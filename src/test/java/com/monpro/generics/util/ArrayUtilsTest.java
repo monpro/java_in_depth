@@ -2,6 +2,7 @@ package com.monpro.generics.util;
 
 import org.junit.jupiter.api.Test;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -222,5 +223,13 @@ public class ArrayUtilsTest {
     }
     assertArrayEquals(ArrayUtils.numsSameDiffBfs(3, 7), new int[]{181,292,707,818,929});
     assertArrayEquals(ArrayUtils.numsSameConsecDiffDfs(3, 7), new int[]{181,292,707,818,929});
+  }
+
+  @Test
+  void numSubMatrixTest() {
+    assertEquals(ArrayUtils.numSubMatrix(new int[][]{{1}}), 1);
+    assertEquals(ArrayUtils.numSubMatrix(new int[][]{{1,1,1,1}}), 10);
+    assertEquals(ArrayUtils.numSubMatrix(new int[][]{{1,1,1,1}, {1,1,1,1}}), 30);
+    assertEquals(ArrayUtils.numSubMatrix(new int[][]{{1,1,1,0}, {1,0,1,1}}), 12);
   }
 }

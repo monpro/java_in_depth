@@ -934,4 +934,23 @@ public class ArrayUtils {
       }
     }
   }
+
+  public static int numSubMatrix(int[][] mat) {
+    if(mat == null || mat.length == 0 || mat[0].length == 0) {
+      return -1;
+    }
+    int m = mat.length, n = mat[0].length, result = 0;
+    int[] height = new int[n];
+    for(int i = 0; i < m; i++) {
+      for(int j = 0; j < n; j++) {
+        height[j] = mat[i][j] == 0 ? 0: height[j] + 1;
+        int min = height[j];
+        for(int k = j; k >= 0 && min >= 0; k--) {
+          min = Math.min(height[k], min);
+          result += min;
+        }
+      }
+    }
+    return result;
+  }
 }
