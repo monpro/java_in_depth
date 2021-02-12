@@ -3,7 +3,7 @@ package com.monpro.effectivejava.method;
 import java.math.BigInteger;
 import java.util.*;
 
-public class overloading {
+public class Overloading {
 
   static class Wine {
     String name() {
