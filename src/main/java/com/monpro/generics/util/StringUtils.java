@@ -190,4 +190,18 @@ public class StringUtils {
     }
     return new String(array);
   }
+
+  public static int balancedLRSplit(String s) {
+    int result = 0, count = 0;
+    for (char ch : s.toCharArray()) {
+      count += ch == 'L' ? 1 : -1;
+      if(ch != 'L' && ch != 'R') {
+          throw new IllegalArgumentException();
+      }
+      if (count == 0) {
+        result += 1;
+      }
+    }
+    return result;
+  }
 }
