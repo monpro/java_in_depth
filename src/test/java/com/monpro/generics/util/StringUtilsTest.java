@@ -1,6 +1,8 @@
 package com.monpro.generics.util;
 
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class StringUtilsTest {
@@ -43,5 +45,13 @@ public class StringUtilsTest {
         assertEquals(StringUtils.checkIfSubStringCouldBreak("abc", "abe"), true);
         assertEquals(StringUtils.checkIfSubStringCouldBreak("abc", "ab"), false);
         assertEquals(StringUtils.checkIfSubStringCouldBreak("adc", "abe"), false);
+    }
+
+    @Test
+    void reverseOnlyLettersTest() {
+        assertEquals(StringUtils.reverseOnlyLetters("a-bC-dEf-ghIj"), "j-Ih-gfE-dCba");
+        assertEquals(StringUtils.reverseOnlyLetters("Test1ng-Leet=code-Q!"), "Qedo1ct-eeLg=ntse-T!");
+        assertEquals(StringUtils.reverseOnlyLetters("13abf4"), "13fba4");
+        assertEquals(StringUtils.reverseOnlyLetters(""), "");
     }
 }
