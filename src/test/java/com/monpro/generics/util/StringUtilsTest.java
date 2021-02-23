@@ -37,4 +37,11 @@ public class StringUtilsTest {
         assertEquals(StringUtils.numEqualDistinctSplits("aacaba"), 2);
         assertEquals(StringUtils.numEqualDistinctSplits("abcd"), 1);
     }
+
+    @Test
+    void checkIfSubStringCouldBreakTest() {
+        assertEquals(StringUtils.checkIfSubStringCouldBreak("abc", "abe"), true);
+        assertEquals(StringUtils.checkIfSubStringCouldBreak("abc", "ab"), false);
+        assertEquals(StringUtils.checkIfSubStringCouldBreak("adc", "abe"), false);
+    }
 }

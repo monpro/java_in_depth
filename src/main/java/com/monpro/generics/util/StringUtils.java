@@ -140,4 +140,35 @@ public class StringUtils {
         }
         return result;
     }
+
+    public static boolean checkIfSubStringCouldBreak(String s1, String s2) {
+        if(s1.length() != s2.length()) {
+            return false;
+        }
+        int n = s1.length();
+        int[] countS1 = new int[26];
+        int[] countS2 = new int[26];
+
+        for(int i = 0; i < s1.length(); i++) {
+            countS1[s1.charAt(i) - 'a'] += 1;
+            countS2[s2.charAt(i) - 'a'] += 1;
+        }
+
+        boolean s1LargerThanS2 = false;
+        boolean s2LargerThanS1 = false;
+        int countS1Num = 0, countS2Num = 0;
+        for(int i = 0; i < 26; i++) {
+            countS1Num += countS1[i];
+            countS2Num += countS2[i];
+            if(countS1Num > countS2Num) {
+                if(s2LargerThanS1) return false;
+                s1LargerThanS2 = true;
+            }
+            if(countS2Num > countS1Num) {
+                if(s1LargerThanS2) return false;
+                s2LargerThanS1 = true;
+            }
+        }
+        return true;
+    }
 }
