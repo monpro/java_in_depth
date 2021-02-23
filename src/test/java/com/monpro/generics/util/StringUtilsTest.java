@@ -30,4 +30,11 @@ public class StringUtilsTest {
     assertEquals(StringUtils.maxNumberOfUniqueSubString("ababccc"), 5);
     assertEquals(StringUtils.maxNumberOfUniqueSubString("abc"), 3);
     }
+
+    @Test
+    void numEqualDistinctSplitsTest() {
+        assertEquals(StringUtils.numEqualDistinctSplits(""), 0);
+        assertEquals(StringUtils.numEqualDistinctSplits("aacaba"), 2);
+        assertEquals(StringUtils.numEqualDistinctSplits("abcd"), 1);
+    }
 }

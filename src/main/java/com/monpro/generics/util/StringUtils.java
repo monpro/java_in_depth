@@ -1,6 +1,8 @@
 package com.monpro.generics.util;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 public class StringUtils {
@@ -115,6 +117,26 @@ public class StringUtils {
                 result = Math.max(result, nextNumber + 1);
             }
             set.remove(uniqueString);
+        }
+        return result;
+    }
+
+    public static int numEqualDistinctSplits(String s) {
+        int n = s.length();
+        int result = 0;
+        int[] prefix = new int[n];
+        Map<Character, Integer> count = new HashMap<>();
+        char[] array = s.toCharArray();
+        for(int i = 0; i < n; i++) {
+            count.putIfAbsent(array[i], 1);
+            prefix[i] = count.size();
+        }
+        count.clear();
+        for(int i = n - 1; i >= 1; i--) {
+            count.putIfAbsent(array[i], 1);
+            if(prefix[i - 1] == count.size()) {
+                result += 1;
+            }
         }
         return result;
     }

@@ -22,6 +22,7 @@ public class Varargs {
     return min;
   }
 
+
   /**
    * it corrects the deficiencies of the previous one
    *
