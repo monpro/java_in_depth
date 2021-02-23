@@ -232,4 +232,13 @@ public class ArrayUtilsTest {
     assertEquals(ArrayUtils.numSubMatrix(new int[][]{{1,1,1,1}, {1,1,1,1}}), 30);
     assertEquals(ArrayUtils.numSubMatrix(new int[][]{{1,1,1,0}, {1,0,1,1}}), 12);
   }
+
+  @Test
+  void canSplitArrayIntoConsecutiveSequencesTest() {
+    assertEquals(ArrayUtils.canSplitArrayIntoConsecutiveSequences(new int[]{1,2,3,3,4,5}), true);
+    assertEquals(ArrayUtils.canSplitArrayIntoConsecutiveSequences(new int[]{1,2,3,4,5}), true);
+    assertEquals(ArrayUtils.canSplitArrayIntoConsecutiveSequences(new int[]{1,4,2,3,4,5}), false);
+    assertEquals(ArrayUtils.canSplitArrayIntoConsecutiveSequences(new int[]{1,2,3,4,4,5}), false);
+    assertEquals(ArrayUtils.canSplitArrayIntoConsecutiveSequences(new int[]{}), false);
+  }
 }

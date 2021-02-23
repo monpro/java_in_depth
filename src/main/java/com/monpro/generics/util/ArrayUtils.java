@@ -953,4 +953,33 @@ public class ArrayUtils {
     }
     return result;
   }
+
+  public static boolean canSplitArrayIntoConsecutiveSequences(int[] nums) {
+    if(nums.length < 3) {
+      return false;
+    }
+    Map<Integer, Integer> freq = new HashMap<>();
+    Map<Integer, Integer> sequence = new HashMap<>();
+    for(int num: nums) {
+      freq.put(num, freq.getOrDefault(num, 0) + 1);
+    }
+    for(int num: nums) {
+      if(freq.get(num) == 0) {
+        continue;
+      } else if(sequence.getOrDefault(num, 0) > 0) {
+        sequence.put(num, sequence.get(num) - 1);
+        sequence.put(num + 1, sequence.getOrDefault(num + 1, 0) + 1);
+      } else if(freq.getOrDefault(num + 1, 0) > 0 && freq.getOrDefault(num + 2, 0) > 0) {
+        freq.put(num + 1, freq.get(num + 1) - 1);
+        freq.put(num + 2, freq.get(num + 2) - 1);
+        sequence.put(num + 3, sequence.getOrDefault(num + 3, 0) + 1);
+      }
+      else {
+        return false;
+      }
+
+      freq.put(num, freq.get(num) - 1);
+    }
+    return true;
+  }
 }
