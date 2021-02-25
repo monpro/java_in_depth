@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class StringUtilsTest {
+class StringUtilsTest {
 
   @Test
   void maximumPointsTest() {
@@ -75,5 +75,14 @@ public class StringUtilsTest {
     assertEquals(StringUtils.removeDuplicatesInPlace(""), "");
     assertEquals(StringUtils.removeDuplicatesInPlace("aabcdd"), "bc");
     assertEquals(StringUtils.removeDuplicatesInPlace("abbaca"), "ca");
+  }
+
+  @Test
+  void removeAdjacentKDuplicatesTest() {
+    assertEquals(StringUtils.removeAdjacentKDuplicates("", 1), "");
+    assertEquals(StringUtils.removeAdjacentKDuplicates("aac", -1), "");
+    assertEquals(StringUtils.removeAdjacentKDuplicates("aaacb", 2), "acb");
+    assertEquals(StringUtils.removeAdjacentKDuplicates("aaacb", 3), "cb");
+    assertEquals(StringUtils.removeAdjacentKDuplicates("deeedbbcccbdaa", 3), "aa");
   }
 }

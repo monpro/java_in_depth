@@ -1,9 +1,6 @@
 package com.monpro.generics.util;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class StringUtils {
   public static int maximumPoints(String s, int x, int y) {
@@ -232,5 +229,34 @@ public class StringUtils {
       }
     }
     return sb.toString();
+  }
+
+  public static String removeAdjacentKDuplicates(String s, int k) {
+    if(s == null || s.length() == 0 || k <= 0) {
+      return "";
+    }
+    Stack<Character> stack = new Stack<>();
+    Stack<Integer> countStack = new Stack<>();
+
+    for(char ch: s.toCharArray()) {
+      if(!stack.isEmpty() && stack.peek() == ch) {
+        countStack.push(countStack.peek() + 1);
+      } else {
+        countStack.push(1);
+      }
+      stack.push(ch);
+      if(countStack.peek() == k) {
+        for(int i = 0; i < k; i++) {
+          stack.pop();
+          countStack.pop();
+        }
+      }
+    }
+
+    StringBuilder sb = new StringBuilder();
+    while (!stack.isEmpty()) {
+      sb.append(stack.pop());
+    }
+    return sb.reverse().toString();
   }
 }
