@@ -2,7 +2,6 @@ package com.monpro.generics.util;
 
 import org.junit.jupiter.api.Test;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -172,81 +171,97 @@ public class ArrayUtilsTest {
 
   @Test
   void getDelayTimeTest() {
-    assertEquals(
-            ArrayUtils.getDelayTime(new int[][]{{2, 1, 1}, {2, 3, 1}, {3, 4, 1}}, 4, 2), 2
-    );
+    assertEquals(ArrayUtils.getDelayTime(new int[][] {{2, 1, 1}, {2, 3, 1}, {3, 4, 1}}, 4, 2), 2);
   }
 
   @Test
   void isValidPathForStreetsTest() {
-    assertEquals(ArrayUtils.isValidPathForStreets(new int[][]{{2, 4, 3}, {6, 5, 2}}), true);
-    assertEquals(ArrayUtils.isValidPathForStreets(new int[][]{{1, 2, 1}, {6, 5, 2}}), false);
+    assertEquals(ArrayUtils.isValidPathForStreets(new int[][] {{2, 4, 3}, {6, 5, 2}}), true);
+    assertEquals(ArrayUtils.isValidPathForStreets(new int[][] {{1, 2, 1}, {6, 5, 2}}), false);
   }
 
   @Test
-  void sumOddLengthArrayTest(){
-    assertEquals(ArrayUtils.sumOddLengthArray(new int[]{1, 2, 3, 4, 5}), 57);
-    assertEquals(ArrayUtils.sumOddLengthArray(new int[]{}), 0);
-    assertEquals(ArrayUtils.sumOddLengthArray(new int[]{1, 2, 3, 4, 55}), 207);
+  void sumOddLengthArrayTest() {
+    assertEquals(ArrayUtils.sumOddLengthArray(new int[] {1, 2, 3, 4, 5}), 57);
+    assertEquals(ArrayUtils.sumOddLengthArray(new int[] {}), 0);
+    assertEquals(ArrayUtils.sumOddLengthArray(new int[] {1, 2, 3, 4, 55}), 207);
   }
 
   @Test
   void sumEvenLengthArrayTest() {
-    assertEquals(ArrayUtils.sumEvenLengthArray(new int[]{1, 2, 3, 4, 5}), 48);
-    assertEquals(ArrayUtils.sumEvenLengthArray(new int[]{}), 0);
-    assertEquals(ArrayUtils.sumEvenLengthArray(new int[]{1, 2, 3, 4, 55}), 148);
+    assertEquals(ArrayUtils.sumEvenLengthArray(new int[] {1, 2, 3, 4, 5}), 48);
+    assertEquals(ArrayUtils.sumEvenLengthArray(new int[] {}), 0);
+    assertEquals(ArrayUtils.sumEvenLengthArray(new int[] {1, 2, 3, 4, 55}), 148);
   }
 
   @Test
   void rankTeamsTest() {
-    assertEquals(ArrayUtils.rankTeams(new String[]{"ABC","ACB","ABC","ACB","ACB"}), "ACB");
-    assertEquals(ArrayUtils.rankTeams(new String[]{"WXYZ","XYZW"}), "XWYZ");
-    assertEquals(ArrayUtils.rankTeams(new String[]{"BCA","CAB","CBA","ABC","ACB","BAC"}), "ABC");
+    assertEquals(ArrayUtils.rankTeams(new String[] {"ABC", "ACB", "ABC", "ACB", "ACB"}), "ACB");
+    assertEquals(ArrayUtils.rankTeams(new String[] {"WXYZ", "XYZW"}), "XWYZ");
+    assertEquals(
+        ArrayUtils.rankTeams(new String[] {"BCA", "CAB", "CBA", "ABC", "ACB", "BAC"}), "ABC");
   }
 
   @Test
   void getMaxSubArrayWithPositiveProductTest() {
-    assertEquals(ArrayUtils.getMaxSubArrayWithPositiveProduct(new int[]{1,-2,-3,4}), 4);
-    assertEquals(ArrayUtils.getMaxSubArrayWithPositiveProduct(new int[]{0,1,-2,-3,-4}), 3);
-    assertEquals(ArrayUtils.getMaxSubArrayWithPositiveProduct(new int[]{-1,-2,-3,0,1}), 2);
+    assertEquals(ArrayUtils.getMaxSubArrayWithPositiveProduct(new int[] {1, -2, -3, 4}), 4);
+    assertEquals(ArrayUtils.getMaxSubArrayWithPositiveProduct(new int[] {0, 1, -2, -3, -4}), 3);
+    assertEquals(ArrayUtils.getMaxSubArrayWithPositiveProduct(new int[] {-1, -2, -3, 0, 1}), 2);
   }
 
   @Test
   void drawColorOnBorderTest() {
-    assertArrayEquals(ArrayUtils.drawColorOnBorder(new int[][]{{1, 1}, {1, 2}}, 0, 0, 3), new int[][]{{3, 3}, {3, 2}});
+    assertArrayEquals(
+        ArrayUtils.drawColorOnBorder(new int[][] {{1, 1}, {1, 2}}, 0, 0, 3),
+        new int[][] {{3, 3}, {3, 2}});
   }
 
   @Test
   void numsSameDiffTest() {
-    for(int i = 2; i < 9; i++) {
+    for (int i = 2; i < 9; i++) {
       assertArrayEquals(ArrayUtils.numsSameDiffBfs(i, 7), ArrayUtils.numsSameConsecDiffDfs(i, 7));
     }
-    assertArrayEquals(ArrayUtils.numsSameDiffBfs(3, 7), new int[]{181,292,707,818,929});
-    assertArrayEquals(ArrayUtils.numsSameConsecDiffDfs(3, 7), new int[]{181,292,707,818,929});
+    assertArrayEquals(ArrayUtils.numsSameDiffBfs(3, 7), new int[] {181, 292, 707, 818, 929});
+    assertArrayEquals(ArrayUtils.numsSameConsecDiffDfs(3, 7), new int[] {181, 292, 707, 818, 929});
   }
 
   @Test
   void numSubMatrixTest() {
-    assertEquals(ArrayUtils.numSubMatrix(new int[][]{{1}}), 1);
-    assertEquals(ArrayUtils.numSubMatrix(new int[][]{{1,1,1,1}}), 10);
-    assertEquals(ArrayUtils.numSubMatrix(new int[][]{{1,1,1,1}, {1,1,1,1}}), 30);
-    assertEquals(ArrayUtils.numSubMatrix(new int[][]{{1,1,1,0}, {1,0,1,1}}), 12);
+    assertEquals(ArrayUtils.numSubMatrix(new int[][] {{1}}), 1);
+    assertEquals(ArrayUtils.numSubMatrix(new int[][] {{1, 1, 1, 1}}), 10);
+    assertEquals(ArrayUtils.numSubMatrix(new int[][] {{1, 1, 1, 1}, {1, 1, 1, 1}}), 30);
+    assertEquals(ArrayUtils.numSubMatrix(new int[][] {{1, 1, 1, 0}, {1, 0, 1, 1}}), 12);
   }
 
   @Test
   void canSplitArrayIntoConsecutiveSequencesTest() {
-    assertEquals(ArrayUtils.canSplitArrayIntoConsecutiveSequences(new int[]{1,2,3,3,4,5}), true);
-    assertEquals(ArrayUtils.canSplitArrayIntoConsecutiveSequences(new int[]{1,2,3,4,5}), true);
-    assertEquals(ArrayUtils.canSplitArrayIntoConsecutiveSequences(new int[]{1,4,2,3,4,5}), false);
-    assertEquals(ArrayUtils.canSplitArrayIntoConsecutiveSequences(new int[]{1,2,3,4,4,5}), false);
-    assertEquals(ArrayUtils.canSplitArrayIntoConsecutiveSequences(new int[]{}), false);
+    assertEquals(
+        ArrayUtils.canSplitArrayIntoConsecutiveSequences(new int[] {1, 2, 3, 3, 4, 5}), true);
+    assertEquals(ArrayUtils.canSplitArrayIntoConsecutiveSequences(new int[] {1, 2, 3, 4, 5}), true);
+    assertEquals(
+        ArrayUtils.canSplitArrayIntoConsecutiveSequences(new int[] {1, 4, 2, 3, 4, 5}), false);
+    assertEquals(
+        ArrayUtils.canSplitArrayIntoConsecutiveSequences(new int[] {1, 2, 3, 4, 4, 5}), false);
+    assertEquals(ArrayUtils.canSplitArrayIntoConsecutiveSequences(new int[] {}), false);
   }
 
   @Test
   void buildStackOperationArrayTest() {
     assertEquals(ArrayUtils.buildStackOperationArray(null, 1), new ArrayList<>());
-    assertEquals(ArrayUtils.buildStackOperationArray(new int[]{}, 1), new ArrayList<>());
-    assertEquals(ArrayUtils.buildStackOperationArray(new int[]{1, 3}, -1), new ArrayList<>());
-    assertEquals(ArrayUtils.buildStackOperationArray(new int[]{1, 3}, 3), new ArrayList<>(Arrays.asList("Push","Push","Pop","Push")));
+    assertEquals(ArrayUtils.buildStackOperationArray(new int[] {}, 1), new ArrayList<>());
+    assertEquals(ArrayUtils.buildStackOperationArray(new int[] {1, 3}, -1), new ArrayList<>());
+    assertEquals(
+        ArrayUtils.buildStackOperationArray(new int[] {1, 3}, 3),
+        new ArrayList<>(Arrays.asList("Push", "Push", "Pop", "Push")));
+  }
+
+  @Test
+  void smallestSubSequenceTest() {
+    assertArrayEquals(ArrayUtils.smallestSubSequence(new int[] {}, 1), new int[] {});
+    assertArrayEquals(ArrayUtils.smallestSubSequence(new int[] {1, 3}, -1), new int[] {});
+    assertArrayEquals(ArrayUtils.smallestSubSequence(new int[] {3, 5, 2, 6}, 2), new int[] {2, 6});
+    assertArrayEquals(
+        ArrayUtils.smallestSubSequence(new int[] {2, 4, 3, 3, 5, 4, 9, 6}, 4),
+        new int[] {2, 3, 3, 4});
   }
 }

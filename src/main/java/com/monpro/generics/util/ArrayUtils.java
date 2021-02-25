@@ -999,4 +999,26 @@ public class ArrayUtils {
     }
     return result;
   }
+
+  public static int[] smallestSubSequence(int[] nums, int k) {
+    if (nums == null || nums.length == 0 || k <= 0) {
+      return new int[] {};
+    }
+    Stack<Integer> stack = new Stack<>();
+    int[] result = new int[k];
+    for (int i = 0; i < nums.length; i++) {
+      while (!stack.isEmpty()
+          && nums[i] < nums[stack.peek()]
+          && stack.size() + nums.length - i > k) {
+        stack.pop();
+      }
+      if (stack.size() < k) {
+        stack.add(i);
+      }
+    }
+    for (int i = k - 1; i >= 0; i--) {
+      result[i] = nums[stack.pop()];
+    }
+    return result;
+  }
 }
