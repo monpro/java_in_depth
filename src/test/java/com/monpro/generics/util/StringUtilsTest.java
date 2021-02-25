@@ -69,4 +69,11 @@ public class StringUtilsTest {
     assertEquals(StringUtils.removeOuterParentheses("(()())"), "()()");
     assertEquals(StringUtils.removeOuterParentheses("(()))"), "()");
   }
+
+  @Test
+  void removeDuplicatesInPlaceTest() {
+    assertEquals(StringUtils.removeDuplicatesInPlace(""), "");
+    assertEquals(StringUtils.removeDuplicatesInPlace("aabcdd"), "bc");
+    assertEquals(StringUtils.removeDuplicatesInPlace("abbaca"), "ca");
+  }
 }

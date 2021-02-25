@@ -217,4 +217,20 @@ public class StringUtils {
     }
     return sb.toString();
   }
+
+  public static String removeDuplicatesInPlace(String S) {
+    StringBuilder sb = new StringBuilder();
+    if(S == null || S.length() == 0) {
+      return sb.toString();
+    }
+    for(char ch: S.toCharArray()) {
+      int size = sb.length();
+      if(size > 0 && sb.charAt(size - 1) == ch) {
+        sb.deleteCharAt(size - 1);
+      } else {
+        sb.append(ch);
+      }
+    }
+    return sb.toString();
+  }
 }
