@@ -936,16 +936,16 @@ public class ArrayUtils {
   }
 
   public static int numSubMatrix(int[][] mat) {
-    if(mat == null || mat.length == 0 || mat[0].length == 0) {
+    if (mat == null || mat.length == 0 || mat[0].length == 0) {
       return -1;
     }
     int m = mat.length, n = mat[0].length, result = 0;
     int[] height = new int[n];
-    for(int i = 0; i < m; i++) {
-      for(int j = 0; j < n; j++) {
-        height[j] = mat[i][j] == 0 ? 0: height[j] + 1;
+    for (int i = 0; i < m; i++) {
+      for (int j = 0; j < n; j++) {
+        height[j] = mat[i][j] == 0 ? 0 : height[j] + 1;
         int min = height[j];
-        for(int k = j; k >= 0 && min >= 0; k--) {
+        for (int k = j; k >= 0 && min >= 0; k--) {
           min = Math.min(height[k], min);
           result += min;
         }
@@ -955,31 +955,48 @@ public class ArrayUtils {
   }
 
   public static boolean canSplitArrayIntoConsecutiveSequences(int[] nums) {
-    if(nums.length < 3) {
+    if (nums.length < 3) {
       return false;
     }
     Map<Integer, Integer> freq = new HashMap<>();
     Map<Integer, Integer> sequence = new HashMap<>();
-    for(int num: nums) {
+    for (int num : nums) {
       freq.put(num, freq.getOrDefault(num, 0) + 1);
     }
-    for(int num: nums) {
-      if(freq.get(num) == 0) {
+    for (int num : nums) {
+      if (freq.get(num) == 0) {
         continue;
-      } else if(sequence.getOrDefault(num, 0) > 0) {
+      } else if (sequence.getOrDefault(num, 0) > 0) {
         sequence.put(num, sequence.get(num) - 1);
         sequence.put(num + 1, sequence.getOrDefault(num + 1, 0) + 1);
-      } else if(freq.getOrDefault(num + 1, 0) > 0 && freq.getOrDefault(num + 2, 0) > 0) {
+      } else if (freq.getOrDefault(num + 1, 0) > 0 && freq.getOrDefault(num + 2, 0) > 0) {
         freq.put(num + 1, freq.get(num + 1) - 1);
         freq.put(num + 2, freq.get(num + 2) - 1);
         sequence.put(num + 3, sequence.getOrDefault(num + 3, 0) + 1);
-      }
-      else {
+      } else {
         return false;
       }
 
       freq.put(num, freq.get(num) - 1);
     }
     return true;
+  }
+
+  public static List<String> buildStackOperationArray(int[] target, int n) {
+    List<String> result = new ArrayList<>();
+
+    if (target == null || target.length == 0 || n <= 0) {
+      return result;
+    }
+    int cur = 1;
+    for (int i = 0; i < target.length; i++) {
+      result.add("Push");
+      if (cur != target[i]) {
+        result.add("Pop");
+        i -= 1;
+      }
+      cur += 1;
+    }
+    return result;
   }
 }

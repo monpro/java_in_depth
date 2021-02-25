@@ -241,4 +241,12 @@ public class ArrayUtilsTest {
     assertEquals(ArrayUtils.canSplitArrayIntoConsecutiveSequences(new int[]{1,2,3,4,4,5}), false);
     assertEquals(ArrayUtils.canSplitArrayIntoConsecutiveSequences(new int[]{}), false);
   }
+
+  @Test
+  void buildStackOperationArrayTest() {
+    assertEquals(ArrayUtils.buildStackOperationArray(null, 1), new ArrayList<>());
+    assertEquals(ArrayUtils.buildStackOperationArray(new int[]{}, 1), new ArrayList<>());
+    assertEquals(ArrayUtils.buildStackOperationArray(new int[]{1, 3}, -1), new ArrayList<>());
+    assertEquals(ArrayUtils.buildStackOperationArray(new int[]{1, 3}, 3), new ArrayList<>(Arrays.asList("Push","Push","Pop","Push")));
+  }
 }
