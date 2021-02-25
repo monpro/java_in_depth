@@ -195,13 +195,26 @@ public class StringUtils {
     int result = 0, count = 0;
     for (char ch : s.toCharArray()) {
       count += ch == 'L' ? 1 : -1;
-      if(ch != 'L' && ch != 'R') {
-          throw new IllegalArgumentException();
+      if (ch != 'L' && ch != 'R') {
+        throw new IllegalArgumentException();
       }
       if (count == 0) {
         result += 1;
       }
     }
     return result;
+  }
+
+  public static String removeOuterParentheses(String S) {
+    StringBuilder sb = new StringBuilder();
+    if (S == null || S.length() == 0) {
+      return sb.toString();
+    }
+    int openCount = 0;
+    for (char ch : S.toCharArray()) {
+      if (ch == '(' && openCount++ > 0) sb.append('(');
+      if (ch == ')' && openCount-- > 1) sb.append(')');
+    }
+    return sb.toString();
   }
 }

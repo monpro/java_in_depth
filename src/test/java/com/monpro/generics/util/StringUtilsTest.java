@@ -61,4 +61,12 @@ public class StringUtilsTest {
     assertEquals(StringUtils.balancedLRSplit("RLLLLRRRLR"), 3);
     assertThrows(IllegalArgumentException.class, () -> StringUtils.balancedLRSplit("LrR"));
   }
+
+  @Test
+  void removeOuterParenthesesTest() {
+    assertEquals(StringUtils.removeOuterParentheses(""), "");
+    assertEquals(StringUtils.removeOuterParentheses("()()"), "");
+    assertEquals(StringUtils.removeOuterParentheses("(()())"), "()()");
+    assertEquals(StringUtils.removeOuterParentheses("(()))"), "()");
+  }
 }
