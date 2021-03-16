@@ -11,10 +11,10 @@ class Interval {
   }
 }
 
-public class ArrayUtils {
+class ArrayUtils {
   private ArrayUtils() {}
 
-  public static boolean skipToLastIndex(int[] nums) {
+  static boolean skipToLastIndex(int[] nums) {
     /**
      * O(n^2) solution
      *
@@ -34,7 +34,7 @@ public class ArrayUtils {
     return true;
   }
 
-  public static int minStepsToLastIndex(int[] nums) {
+  static int minStepsToLastIndex(int[] nums) {
     int result = 0;
     int curFurthest = 0, curEnd = 0;
 
@@ -48,7 +48,7 @@ public class ArrayUtils {
     return result;
   }
 
-  public static boolean canReachToIndexWithValueZero(int[] nums, int start) {
+  static boolean canReachToIndexWithValueZero(int[] nums, int start) {
     Stack<Integer> stack = new Stack<>();
     Set<Integer> set = new HashSet<>();
     stack.add(start);
@@ -72,7 +72,7 @@ public class ArrayUtils {
     return false;
   }
 
-  public static int shortestPathInBinaryMatrix(int[][] grid) {
+  static int shortestPathInBinaryMatrix(int[][] grid) {
     int m = grid.length, n = grid[0].length;
     if (grid[0][0] == 1 || grid[m - 1][n - 1] == 1) {
       return -1;
@@ -101,12 +101,12 @@ public class ArrayUtils {
     return -1;
   }
 
-  public static boolean isValid(int[][] grid, boolean[][] visited, int x, int y) {
+  private static boolean isValid(int[][] grid, boolean[][] visited, int x, int y) {
     int m = grid.length, n = grid[0].length;
     return x >= 0 && x <= m - 1 && y >= 0 && y <= n - 1 && grid[x][y] == 0;
   }
 
-  public static int getSumOfDiagonal(int[][] mat) {
+  static int getSumOfDiagonal(int[][] mat) {
     int result = 0;
     int x = 0, y = 0;
     int m = mat.length;
@@ -130,7 +130,7 @@ public class ArrayUtils {
     return result;
   }
 
-  public static int[] transfromCells(int[] cells, int N) {
+  static int[] transfromCells(int[] cells, int N) {
     Map<String, Integer> cache = new HashMap<>();
     while (N > 0) {
       int[] nextCells = new int[8];
@@ -148,7 +148,7 @@ public class ArrayUtils {
     return cells;
   }
 
-  public static int maxPointsOnSameLine(Point[] points) {
+  static int maxPointsOnSameLine(Point[] points) {
     if (points == null) {
       return 0;
     }
@@ -189,7 +189,7 @@ public class ArrayUtils {
     }
   }
 
-  public static int minimumPointsCombineArray(List<Integer> sticks) {
+  static int minimumPointsCombineArray(List<Integer> sticks) {
     // write your code here
     PriorityQueue<Integer> queue = new PriorityQueue<>();
     for (Integer stick : sticks) {
@@ -205,7 +205,7 @@ public class ArrayUtils {
     return result;
   }
 
-  public static int throwCount(float[] bags, float limit) {
+  static int throwCount(float[] bags, float limit) {
     int left = 0, right = bags.length - 1;
     int result = 0;
     Arrays.sort(bags);
@@ -225,7 +225,7 @@ public class ArrayUtils {
     return result;
   }
 
-  public static boolean canPartition(int[] nums) {
+  static boolean canPartition(int[] nums) {
     if (nums.length < 5) return false;
     int prefix = 0, suffix = nums[nums.length - 1];
     Map<Integer, Integer> prefix_sum = new HashMap<>();
@@ -245,7 +245,7 @@ public class ArrayUtils {
     return false;
   }
 
-  public static List<String> convertToPostfixNotation(String[] expression) {
+  static List<String> convertToPostfixNotation(String[] expression) {
     if (expression == null || expression.length == 0) {
       return null;
     }
@@ -291,7 +291,7 @@ public class ArrayUtils {
     return 0;
   }
 
-  public static List<Long> getSumOfIntervals(int[] nums, List<Interval> intervals) {
+  static List<Long> getSumOfIntervals(int[] nums, List<Interval> intervals) {
     List<Long> result = new ArrayList<>();
     if (intervals == null || intervals.size() == 0 || nums == null || nums.length == 0) {
       return result;
@@ -310,7 +310,7 @@ public class ArrayUtils {
     return result;
   }
 
-  public static boolean bipartitionArray(int N, int[][] differentGroup) {
+  static boolean bipartitionArray(int N, int[][] differentGroup) {
     // if we tried to do the partition
     // then dislike[i] cannot be in same group
     // we need to find the dislike mapping
@@ -340,7 +340,7 @@ public class ArrayUtils {
     return true;
   }
 
-  public static boolean dfs(
+  private static boolean dfs(
       Map<Integer, List<Integer>> mapping, int[] group, int index, int color) {
     if (group[index] == 0) {
       group[index] = color;
@@ -351,14 +351,12 @@ public class ArrayUtils {
         }
       }
     } else {
-      if (group[index] != color) {
-        return false;
-      }
+      return group[index] == color;
     }
     return true;
   }
 
-  public static boolean bipartitionArrayTraverse(int N, int[][] differentGroup) {
+  static boolean bipartitionArrayTraverse(int N, int[][] differentGroup) {
     // if we tried to do the partition
     // then dislike[i] cannot be in same group
     // we need to find the dislike mapping
@@ -403,7 +401,7 @@ public class ArrayUtils {
     return true;
   }
 
-  public static List<Integer> smallestSetOfStartingPoints(int n, List<List<Integer>> edges) {
+  static List<Integer> smallestSetOfStartingPoints(int n, List<List<Integer>> edges) {
     List<Integer> result = new ArrayList<>();
     int[] visited = new int[n];
     for (List<Integer> edge : edges) {
@@ -417,7 +415,7 @@ public class ArrayUtils {
     return result;
   }
 
-  public static boolean isPossibleEquations(String[] equations) {
+  static boolean isPossibleEquations(String[] equations) {
     // when will a == b, b
     int[] parent = new int[26];
     for (int i = 0; i < 26; i++) {
@@ -437,7 +435,7 @@ public class ArrayUtils {
     return true;
   }
 
-  public static int minimumCostForConnections(int N, int[][] connections) {
+  static int minimumCostForConnections(int N, int[][] connections) {
     int result = 0, numOfNodes = N;
     Arrays.sort(connections, (a, b) -> a[2] - b[2]);
     int[] parent = new int[N];
@@ -458,14 +456,14 @@ public class ArrayUtils {
     return numOfNodes == 1 ? result : -1;
   }
 
-  public static int find(int x, int[] parent) {
+  private static int find(int x, int[] parent) {
     if (x != parent[x]) {
       parent[x] = find(parent[x], parent);
     }
     return parent[x];
   }
 
-  public static int getDelayTime(int[][] times, int n, int k) {
+  static int getDelayTime(int[][] times, int n, int k) {
     int result = 0;
     // [source: {target: dist}]
     Map<Integer, Map<Integer, Integer>> map = new HashMap<>();
@@ -496,7 +494,7 @@ public class ArrayUtils {
     return n == 0 ? result : -1;
   }
 
-  public static boolean isValidPathForStreets(int[][] grid) {
+  static boolean isValidPathForStreets(int[][] grid) {
 
     if (grid == null || grid.length == 0) {
       return false;
@@ -642,41 +640,6 @@ public class ArrayUtils {
     return parents[node];
   }
 
-  public List<List<String>> accountsMergeDfs(List<List<String>> accounts) {
-    // build graph use dfs
-    // use visited to store visited node
-    // need to store mapping from email to name
-    List<List<String>> result = new ArrayList<>();
-    Map<String, Set<String>> graph = new HashMap<>();
-    Map<String, String> emailToName = new HashMap<>();
-    Set<String> visited = new HashSet<>();
-
-    for (List<String> list : accounts) {
-      for (int i = 1; i < list.size(); i++) {
-        emailToName.put(list.get(i), list.get(0));
-        graph.putIfAbsent(list.get(i), new HashSet<>());
-        if (i > 1) {
-          graph.get(list.get(i)).add(list.get(i - 1));
-          graph.get(list.get(i - 1)).add(list.get(i));
-        }
-      }
-    }
-
-    // iterate email to do dfs
-
-    for (String email : emailToName.keySet()) {
-      TreeSet<String> sortedList = new TreeSet<>();
-      if (!visited.contains(email)) {
-        visited.add(email);
-        accountsMergeDfsHelper(email, visited, sortedList, graph);
-        List<String> list = new ArrayList<>(sortedList);
-        list.add(0, emailToName.get(email));
-        result.add(list);
-      }
-    }
-    return result;
-  }
-
   private static void accountsMergeDfsHelper(
       String email, Set<String> visited, TreeSet<String> list, Map<String, Set<String>> graph) {
     list.add(email);
@@ -688,51 +651,7 @@ public class ArrayUtils {
     }
   }
 
-  public List<List<String>> accountsMergeBfs(List<List<String>> accounts) {
-    // build graph use bfs
-    // use visited to store visited node
-    // need to store mapping from email to name
-    List<List<String>> result = new ArrayList<>();
-    Map<String, Set<String>> graph = new HashMap<>();
-    Map<String, String> emailToName = new HashMap<>();
-    Set<String> visited = new HashSet<>();
-
-    for (List<String> list : accounts) {
-      for (int i = 1; i < list.size(); i++) {
-        emailToName.put(list.get(i), list.get(0));
-        graph.putIfAbsent(list.get(i), new HashSet<>());
-        if (i > 1) {
-          graph.get(list.get(i)).add(list.get(i - 1));
-          graph.get(list.get(i - 1)).add(list.get(i));
-        }
-      }
-    }
-
-    // iterate email to do bfs
-    Queue<String> queue = new LinkedList<>();
-    for (String email : emailToName.keySet()) {
-      TreeSet<String> sortedList = new TreeSet<>();
-      if (!visited.contains(email)) {
-        queue.add(email);
-        while (!queue.isEmpty()) {
-          String node = queue.poll();
-          sortedList.add(node);
-          for (String neighbor : graph.get(node)) {
-            if (!visited.contains(neighbor)) {
-              queue.add(neighbor);
-              visited.add(neighbor);
-            }
-          }
-        }
-        List<String> list = new ArrayList<>(sortedList);
-        list.add(0, emailToName.get(email));
-        result.add(list);
-      }
-    }
-    return result;
-  }
-
-  public static int sumOddLengthArray(int[] arr) {
+  static int sumOddLengthArray(int[] arr) {
     // considering 1,2,3,4,5 of odd sub array
     // 1 will be counted 3 times
     // 2 will be counted 4 times
@@ -747,7 +666,7 @@ public class ArrayUtils {
     return result;
   }
 
-  public static int sumEvenLengthArray(int[] arr) {
+  static int sumEvenLengthArray(int[] arr) {
     int result = 0, n = arr.length;
     for (int i = 0; i < n; i++) {
       result += ((n - i) * (i + 1)) / 2 * arr[i];
@@ -755,7 +674,7 @@ public class ArrayUtils {
     return result;
   }
 
-  public static String rankTeams(String[] votes) {
+  static String rankTeams(String[] votes) {
     // for each team, we need to know it's all positions
     Map<Character, int[]> count = new HashMap<>();
     int n = votes[0].length();
@@ -785,7 +704,7 @@ public class ArrayUtils {
     return sb.toString();
   }
 
-  public static int getMaxSubArrayWithPositiveProduct(int[] nums) {
+  static int getMaxSubArrayWithPositiveProduct(int[] nums) {
     int count = 0, result = 0, zeroIndex = -1, negativeIndex = -1;
     for (int i = 0; i < nums.length; i++) {
       if (nums[i] < 0) {
@@ -858,7 +777,7 @@ public class ArrayUtils {
     return result;
   }
 
-  public static int[][] drawColorOnBorder(int[][] grid, int r0, int c0, int color) {
+  static int[][] drawColorOnBorder(int[][] grid, int r0, int c0, int color) {
     // first come to my mind is bfs
     int m = grid.length, n = grid[0].length;
     boolean[][] visited = new boolean[m][n];
@@ -892,7 +811,7 @@ public class ArrayUtils {
     return grid;
   }
 
-  public static int[] numsSameDiffBfs(int n, int k) {
+  static int[] numsSameDiffBfs(int n, int k) {
     Queue<Integer> queue = new ArrayDeque<>(Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9));
     while (n > 1) {
       int size = queue.size();
@@ -913,7 +832,7 @@ public class ArrayUtils {
     return queue.stream().mapToInt(i -> i).toArray();
   }
 
-  public static int[] numsSameConsecDiffDfs(int n, int k) {
+  static int[] numsSameConsecDiffDfs(int n, int k) {
     List<Integer> result = new ArrayList<>();
     for (int i = 0; i < 10; i++) {
       numsSameConsecDiffDfsHelper(n, k, i, result);
@@ -935,15 +854,15 @@ public class ArrayUtils {
     }
   }
 
-  public static int numSubMatrix(int[][] mat) {
+  static int numSubMatrix(int[][] mat) {
     if (mat == null || mat.length == 0 || mat[0].length == 0) {
       return -1;
     }
     int m = mat.length, n = mat[0].length, result = 0;
     int[] height = new int[n];
-    for (int i = 0; i < m; i++) {
+    for (int[] ints : mat) {
       for (int j = 0; j < n; j++) {
-        height[j] = mat[i][j] == 0 ? 0 : height[j] + 1;
+        height[j] = ints[j] == 0 ? 0 : height[j] + 1;
         int min = height[j];
         for (int k = j; k >= 0 && min >= 0; k--) {
           min = Math.min(height[k], min);
@@ -954,7 +873,7 @@ public class ArrayUtils {
     return result;
   }
 
-  public static boolean canSplitArrayIntoConsecutiveSequences(int[] nums) {
+  static boolean canSplitArrayIntoConsecutiveSequences(int[] nums) {
     if (nums.length < 3) {
       return false;
     }
@@ -982,7 +901,7 @@ public class ArrayUtils {
     return true;
   }
 
-  public static List<String> buildStackOperationArray(int[] target, int n) {
+  static List<String> buildStackOperationArray(int[] target, int n) {
     List<String> result = new ArrayList<>();
 
     if (target == null || target.length == 0 || n <= 0) {
@@ -1000,7 +919,7 @@ public class ArrayUtils {
     return result;
   }
 
-  public static int[] smallestSubSequence(int[] nums, int k) {
+  static int[] smallestSubSequence(int[] nums, int k) {
     if (nums == null || nums.length == 0 || k <= 0) {
       return new int[] {};
     }
@@ -1018,6 +937,85 @@ public class ArrayUtils {
     }
     for (int i = k - 1; i >= 0; i--) {
       result[i] = nums[stack.pop()];
+    }
+    return result;
+  }
+
+  public List<List<String>> accountsMergeDfs(List<List<String>> accounts) {
+    // build graph use dfs
+    // use visited to store visited node
+    // need to store mapping from email to name
+    List<List<String>> result = new ArrayList<>();
+    Map<String, Set<String>> graph = new HashMap<>();
+    Map<String, String> emailToName = new HashMap<>();
+    Set<String> visited = new HashSet<>();
+
+    for (List<String> list : accounts) {
+      for (int i = 1; i < list.size(); i++) {
+        emailToName.put(list.get(i), list.get(0));
+        graph.putIfAbsent(list.get(i), new HashSet<>());
+        if (i > 1) {
+          graph.get(list.get(i)).add(list.get(i - 1));
+          graph.get(list.get(i - 1)).add(list.get(i));
+        }
+      }
+    }
+
+    // iterate email to do dfs
+
+    for (String email : emailToName.keySet()) {
+      TreeSet<String> sortedList = new TreeSet<>();
+      if (!visited.contains(email)) {
+        visited.add(email);
+        accountsMergeDfsHelper(email, visited, sortedList, graph);
+        List<String> list = new ArrayList<>(sortedList);
+        list.add(0, emailToName.get(email));
+        result.add(list);
+      }
+    }
+    return result;
+  }
+
+  public List<List<String>> accountsMergeBfs(List<List<String>> accounts) {
+    // build graph use bfs
+    // use visited to store visited node
+    // need to store mapping from email to name
+    List<List<String>> result = new ArrayList<>();
+    Map<String, Set<String>> graph = new HashMap<>();
+    Map<String, String> emailToName = new HashMap<>();
+    Set<String> visited = new HashSet<>();
+
+    for (List<String> list : accounts) {
+      for (int i = 1; i < list.size(); i++) {
+        emailToName.put(list.get(i), list.get(0));
+        graph.putIfAbsent(list.get(i), new HashSet<>());
+        if (i > 1) {
+          graph.get(list.get(i)).add(list.get(i - 1));
+          graph.get(list.get(i - 1)).add(list.get(i));
+        }
+      }
+    }
+
+    // iterate email to do bfs
+    Queue<String> queue = new LinkedList<>();
+    for (String email : emailToName.keySet()) {
+      TreeSet<String> sortedList = new TreeSet<>();
+      if (!visited.contains(email)) {
+        queue.add(email);
+        while (!queue.isEmpty()) {
+          String node = queue.poll();
+          sortedList.add(node);
+          for (String neighbor : graph.get(node)) {
+            if (!visited.contains(neighbor)) {
+              queue.add(neighbor);
+              visited.add(neighbor);
+            }
+          }
+        }
+        List<String> list = new ArrayList<>(sortedList);
+        list.add(0, emailToName.get(email));
+        result.add(list);
+      }
     }
     return result;
   }

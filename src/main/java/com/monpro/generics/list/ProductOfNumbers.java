@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class ProductOfNumbers {
-  List<Integer> prefixProduct = new ArrayList<>(Arrays.asList(1));
+class ProductOfNumbers {
+  private List<Integer> prefixProduct = new ArrayList<>(Arrays.asList(1));
 
   public ProductOfNumbers() {}
 

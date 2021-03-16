@@ -2,7 +2,7 @@ package com.monpro.effectivejava.method;
 
 import java.util.*;
 
-public class OptionalReturn {
+class OptionalReturn {
   /**
    * this method may not have return value throw an exception is expensive and it should be reserved
    * for exceptional conditions
@@ -28,7 +28,7 @@ public class OptionalReturn {
    * @param <E>
    * @return the max value in the collection containing comparable element
    */
-  public static <E extends Comparable<E>> Optional<E> maxWithOptional(Collection<E> c) {
+  private static <E extends Comparable<E>> Optional<E> maxWithOptional(Collection<E> c) {
 
     if (c.isEmpty()) return Optional.empty();
     E result = null;
@@ -52,6 +52,6 @@ public class OptionalReturn {
     List<Integer> list = new ArrayList<>(Arrays.asList(1, 2, 3, 4));
     int maxInteger = maxWithOptional(emptyList).orElse(-1);
     System.out.println(maxInteger);
-    System.out.println(maxWithOptional(list).map(value -> String.valueOf(value)).orElse("-1"));
+    System.out.println(maxWithOptional(list).map(String::valueOf).orElse("-1"));
   }
 }

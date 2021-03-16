@@ -5,32 +5,33 @@ import java.util.Map;
 import java.util.PriorityQueue;
 
 public class ScoreRank {
-    // hashmap + priority queue
-    Map<Integer, Integer> playerToScore;
-    PriorityQueue<Integer> maxHeap;
-    public ScoreRank() {
-        playerToScore = new HashMap<>();
-    }
+  // hashmap + priority queue
+  private Map<Integer, Integer> playerToScore;
+  private PriorityQueue<Integer> maxHeap;
 
-    public void addScore(int playerId, int score) {
-        playerToScore.put(playerId, playerToScore.getOrDefault(playerId, 0) + score);
-    }
+  public ScoreRank() {
+    playerToScore = new HashMap<>();
+  }
 
-    public int top(int K) {
-        int result = 0;
-        maxHeap = new PriorityQueue<>((a, b) -> b - a);
-        for(Map.Entry<Integer, Integer> entry: playerToScore.entrySet()) {
-            maxHeap.add(entry.getValue());
-        }
-        for(int i = 0; i < K; i++) {
-            if(!maxHeap.isEmpty()) {
-                result += maxHeap.poll();
-            }
-        }
-        return result;
-    }
+  public void addScore(int playerId, int score) {
+    playerToScore.put(playerId, playerToScore.getOrDefault(playerId, 0) + score);
+  }
 
-    public void reset(int playerId) {
-        playerToScore.put(playerId, 0);
+  public int top(int K) {
+    int result = 0;
+    maxHeap = new PriorityQueue<>((a, b) -> b - a);
+    for (Map.Entry<Integer, Integer> entry : playerToScore.entrySet()) {
+      maxHeap.add(entry.getValue());
     }
+    for (int i = 0; i < K; i++) {
+      if (!maxHeap.isEmpty()) {
+        result += maxHeap.poll();
+      }
+    }
+    return result;
+  }
+
+  public void reset(int playerId) {
+    playerToScore.put(playerId, 0);
+  }
 }

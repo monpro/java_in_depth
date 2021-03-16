@@ -35,10 +35,10 @@ class AverageNode {
 }
 
 class ExpressionTreeNode {
-  String symbol;
+  private String symbol;
   ExpressionTreeNode left, right;
 
-  public ExpressionTreeNode(String symbol) {
+  ExpressionTreeNode(String symbol) {
     this.symbol = symbol;
     this.left = this.right = null;
   }
@@ -49,10 +49,10 @@ class ExpressionTreeNode {
   }
 }
 
-public class TreeUtils {
+class TreeUtils {
   private TreeUtils() {}
 
-  public static double maximumAverageSubValue(TreeNode root) {
+  static double maximumAverageSubValue(TreeNode root) {
     return maximumAverageSubValueHelper(root).maxAverageVal;
   }
 
@@ -69,7 +69,7 @@ public class TreeUtils {
     return new AverageNode(sumVal, sumCount, result);
   }
 
-  public static ExpressionTreeNode buildExpressionTree(String[] expression) {
+  static ExpressionTreeNode buildExpressionTree(String[] expression) {
     if (expression == null || expression.length == 0) {
       return null;
     }
@@ -118,7 +118,7 @@ public class TreeUtils {
     return node;
   }
 
-  public static int maxDiffBetweenAncestorsAndNode(TreeNode root) {
+  static int maxDiffBetweenAncestorsAndNode(TreeNode root) {
     return maxDiffBetweenAncestorsAndNodeHelper(root, root.val, root.val);
   }
 
@@ -135,7 +135,7 @@ public class TreeUtils {
         maxDiffBetweenAncestorsAndNodeHelper(root.right, maxValue, minValue));
   }
 
-  public static List<TreeNode> deleteNodes(TreeNode root, int[] deleteNodeValues) {
+  static List<TreeNode> deleteNodes(TreeNode root, int[] deleteNodeValues) {
     List<TreeNode> result = new ArrayList<>();
     Set<Integer> set = new HashSet<>();
     for (int node : deleteNodeValues) {
@@ -169,7 +169,7 @@ public class TreeUtils {
     return root;
   }
 
-  public static TreeNode treeToSortedDoublyListTest(TreeNode root) {
+  static TreeNode treeToSortedDoublyListTest(TreeNode root) {
     // then link together
     if (root == null) {
       return null;
@@ -205,7 +205,7 @@ public class TreeUtils {
     return leftNode;
   }
 
-  public static TreeNode flipTreeUpsideDown(TreeNode root) {
+  static TreeNode flipTreeUpsideDown(TreeNode root) {
     if (root == null || root.left == null) {
       return root;
     }
@@ -220,12 +220,12 @@ public class TreeUtils {
     return newRoot;
   }
 
-  public static TreeNode deepestSubTree(TreeNode root) {
+  static TreeNode deepestSubTree(TreeNode root) {
     return deepestSubTreeHelper(root).getValue();
   }
 
   private static Pair<Integer, TreeNode> deepestSubTreeHelper(TreeNode root) {
-    if(root == null) {
+    if (root == null) {
       return new Pair<>(0, null);
     }
 
@@ -233,29 +233,29 @@ public class TreeUtils {
     Pair<Integer, TreeNode> rightPair = deepestSubTreeHelper(root.right);
 
     int leftHeight = leftPair.getKey(), rightHeight = rightPair.getKey();
-    if(leftHeight == rightHeight) {
+    if (leftHeight == rightHeight) {
       return new Pair<>(leftHeight + 1, root);
-    } else if(leftHeight > rightHeight) {
+    } else if (leftHeight > rightHeight) {
       return new Pair<>(leftHeight + 1, leftPair.getValue());
     } else {
       return new Pair<>(rightHeight + 1, rightPair.getValue());
     }
   }
 
-  public static List<Integer> nodeWithNoSibling(TreeNode root) {
+  static List<Integer> nodeWithNoSibling(TreeNode root) {
     List<Integer> result = new ArrayList<>();
     lonelyNodesHelper(root, result);
     return result;
   }
 
   private static void lonelyNodesHelper(TreeNode root, List<Integer> result) {
-    if(root.left == null && root.right == null) {
+    if (root.left == null && root.right == null) {
       return;
     }
-    if(root.left != null && root.right == null) {
+    if (root.left != null && root.right == null) {
       result.add(root.left.val);
       lonelyNodesHelper(root.left, result);
-    } else if(root.right != null && root.left == null) {
+    } else if (root.right != null && root.left == null) {
       result.add(root.right.val);
       lonelyNodesHelper(root.right, result);
     } else {

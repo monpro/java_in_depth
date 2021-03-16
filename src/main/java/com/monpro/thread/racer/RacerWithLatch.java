@@ -2,36 +2,36 @@ package com.monpro.thread.racer;
 
 import com.monpro.thread.latch.Latch;
 
-public class RacerWithLatch {
-    static class Racer extends Thread{
-        Latch latch;
+class RacerWithLatch {
+  public static void main(String[] args) throws InterruptedException {
+    int num = 10;
+    Latch latch = new Latch(2);
+    Thread[] races = new Thread[10];
 
-        public Racer(Latch latch){
-            this.latch = latch;
-        }
+    for (int i = 0; i < num; i++) {
+      races[i] = new Racer(latch);
+      races[i].start();
+    }
+    Thread.sleep(2000);
+    latch.countDown();
+  }
 
-        @Override
-        public void run() {
-            try{
-                this.latch.await();
-                System.out.println("thread: " + Thread.currentThread().getName());
+  static class Racer extends Thread {
+    Latch latch;
 
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+    Racer(Latch latch) {
+      this.latch = latch;
     }
 
-    public static void main(String[] args) throws InterruptedException {
-        int num = 10;
-        Latch latch = new Latch(2);
-        Thread[] races = new Thread[10];
+    @Override
+    public void run() {
+      try {
+        this.latch.await();
+        System.out.println("thread: " + Thread.currentThread().getName());
 
-        for(int i = 0; i < num; i++){
-            races[i] = new Racer(latch);
-            races[i].start();
-        }
-        Thread.sleep(2000);
-        latch.countDown();
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
     }
+  }
 }

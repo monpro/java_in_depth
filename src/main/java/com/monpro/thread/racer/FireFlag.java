@@ -1,16 +1,16 @@
 package com.monpro.thread.racer;
 
-public class FireFlag {
-    private boolean fired = false;
-    public synchronized void waitForFire() throws InterruptedException {
-        while(!fired){
-            wait();
-        }
-    }
+class FireFlag {
+  private boolean fired = false;
 
-    public synchronized void fire(){
-        this.fired = true;
-        notifyAll();
+  synchronized void waitForFire() throws InterruptedException {
+    while (!fired) {
+      wait();
     }
+  }
 
+  synchronized void fire() {
+    this.fired = true;
+    notifyAll();
+  }
 }

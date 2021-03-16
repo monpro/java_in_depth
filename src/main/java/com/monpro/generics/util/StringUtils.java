@@ -2,8 +2,8 @@ package com.monpro.generics.util;
 
 import java.util.*;
 
-public class StringUtils {
-  public static int maximumPoints(String s, int x, int y) {
+class StringUtils {
+  static int maximumPoints(String s, int x, int y) {
     // first find a,b
     // then b, a
     // use swap order to make sure ab is always larger than ba
@@ -11,7 +11,7 @@ public class StringUtils {
       int temp = x;
       x = y;
       y = temp;
-      StringBuffer sb = new StringBuffer(s);
+      var sb = new StringBuilder(s);
       s = sb.reverse().toString();
     }
 
@@ -59,7 +59,7 @@ public class StringUtils {
     return sb.toString();
   }
 
-  public static String replacePalindrome(String palindrome) {
+  static String replacePalindrome(String palindrome) {
     int n = palindrome.length();
     char[] array = palindrome.toCharArray();
     // cannot be a palindrome after replace
@@ -73,7 +73,7 @@ public class StringUtils {
     return n >= 2 ? String.valueOf(array) : "";
   }
 
-  public static char firstUniChar(String str) {
+  static char firstUniChar(String str) {
     if (str == null || str.length() == 0) {
       return ' ';
     }
@@ -90,7 +90,7 @@ public class StringUtils {
     return ' ';
   }
 
-  public static int maxNumberOfUniqueSubString(String s) {
+  static int maxNumberOfUniqueSubString(String s) {
     Set<String> set = new HashSet<>();
     return maxNumberOfUniqueSubStringDfs(set, 0, s);
   }
@@ -115,7 +115,7 @@ public class StringUtils {
     return result;
   }
 
-  public static int numEqualDistinctSplits(String s) {
+  static int numEqualDistinctSplits(String s) {
     int n = s.length();
     int result = 0;
     int[] prefix = new int[n];
@@ -135,7 +135,7 @@ public class StringUtils {
     return result;
   }
 
-  public static boolean checkIfSubStringCouldBreak(String s1, String s2) {
+  static boolean checkIfSubStringCouldBreak(String s1, String s2) {
     if (s1.length() != s2.length()) {
       return false;
     }
@@ -166,7 +166,7 @@ public class StringUtils {
     return true;
   }
 
-  public static String reverseOnlyLetters(String S) {
+  static String reverseOnlyLetters(String S) {
     char[] array = S.toCharArray();
     int n = S.length();
     int left = 0, right = n - 1;
@@ -188,7 +188,7 @@ public class StringUtils {
     return new String(array);
   }
 
-  public static int balancedLRSplit(String s) {
+  static int balancedLRSplit(String s) {
     int result = 0, count = 0;
     for (char ch : s.toCharArray()) {
       count += ch == 'L' ? 1 : -1;
@@ -202,7 +202,7 @@ public class StringUtils {
     return result;
   }
 
-  public static String removeOuterParentheses(String S) {
+  static String removeOuterParentheses(String S) {
     StringBuilder sb = new StringBuilder();
     if (S == null || S.length() == 0) {
       return sb.toString();
@@ -215,14 +215,14 @@ public class StringUtils {
     return sb.toString();
   }
 
-  public static String removeDuplicatesInPlace(String S) {
+  static String removeDuplicatesInPlace(String S) {
     StringBuilder sb = new StringBuilder();
-    if(S == null || S.length() == 0) {
+    if (S == null || S.length() == 0) {
       return sb.toString();
     }
-    for(char ch: S.toCharArray()) {
+    for (char ch : S.toCharArray()) {
       int size = sb.length();
-      if(size > 0 && sb.charAt(size - 1) == ch) {
+      if (size > 0 && sb.charAt(size - 1) == ch) {
         sb.deleteCharAt(size - 1);
       } else {
         sb.append(ch);
@@ -231,22 +231,22 @@ public class StringUtils {
     return sb.toString();
   }
 
-  public static String removeAdjacentKDuplicates(String s, int k) {
-    if(s == null || s.length() == 0 || k <= 0) {
+  static String removeAdjacentKDuplicates(String s, int k) {
+    if (s == null || s.length() == 0 || k <= 0) {
       return "";
     }
     Stack<Character> stack = new Stack<>();
     Stack<Integer> countStack = new Stack<>();
 
-    for(char ch: s.toCharArray()) {
-      if(!stack.isEmpty() && stack.peek() == ch) {
+    for (char ch : s.toCharArray()) {
+      if (!stack.isEmpty() && stack.peek() == ch) {
         countStack.push(countStack.peek() + 1);
       } else {
         countStack.push(1);
       }
       stack.push(ch);
-      if(countStack.peek() == k) {
-        for(int i = 0; i < k; i++) {
+      if (countStack.peek() == k) {
+        for (int i = 0; i < k; i++) {
           stack.pop();
           countStack.pop();
         }

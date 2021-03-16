@@ -9,7 +9,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class ArrayUtilsTest {
+class ArrayUtilsTest {
   @Test
   void skipToLastIndexTest() {
     int[] nums = new int[] {2, 3, 1, 1, 4};
@@ -250,6 +250,7 @@ public class ArrayUtilsTest {
     assertEquals(ArrayUtils.buildStackOperationArray(null, 1), new ArrayList<>());
     assertEquals(ArrayUtils.buildStackOperationArray(new int[] {}, 1), new ArrayList<>());
     assertEquals(ArrayUtils.buildStackOperationArray(new int[] {1, 3}, -1), new ArrayList<>());
+    List<Integer> list = new ArrayList<>();
     assertEquals(
         ArrayUtils.buildStackOperationArray(new int[] {1, 3}, 3),
         new ArrayList<>(Arrays.asList("Push", "Push", "Pop", "Push")));

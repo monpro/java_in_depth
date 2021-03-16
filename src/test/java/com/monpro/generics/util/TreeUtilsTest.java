@@ -9,7 +9,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class TreeUtilsTest {
+class TreeUtilsTest {
 
   @Test
   void maximumAverageSubValueTest() {
@@ -110,6 +110,7 @@ public class TreeUtilsTest {
     root.right.left = new TreeNode(6);
     List<Integer> result = TreeUtils.nodeWithNoSibling(root);
     List<Integer> list = new ArrayList<>(Arrays.asList(6, 9));
-    assertTrue(result.size() == list.size() && result.containsAll(list) && list.containsAll(result));
+    assertTrue(
+        result.size() == list.size() && result.containsAll(list) && list.containsAll(result));
   }
 }

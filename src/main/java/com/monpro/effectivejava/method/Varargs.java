@@ -1,6 +1,6 @@
 package com.monpro.effectivejava.method;
 
-public class Varargs {
+class Varargs {
   /**
    * This function has several problems: 1.if it is invoked with no arguments, it fails at run time
    * rather than compile time 2. it is ugly because you have to include an explicit array check and
@@ -21,7 +21,6 @@ public class Varargs {
     }
     return min;
   }
-
 
   /**
    * it corrects the deficiencies of the previous one
