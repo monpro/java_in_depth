@@ -11,8 +11,7 @@ class StringUtils {
       int temp = x;
       x = y;
       y = temp;
-      var sb = new StringBuilder(s);
-      s = sb.reverse().toString();
+      s = new StringBuilder(s).reverse().toString();
     }
 
     int countA = 0, countB = 0, result = 0;

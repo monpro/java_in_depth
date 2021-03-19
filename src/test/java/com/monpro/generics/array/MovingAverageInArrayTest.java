@@ -13,7 +13,5 @@ class MovingAverageInArrayTest {
     assertEquals(averageInArray.next(3), 2.5, 0.0001);
     assertEquals(averageInArray.next(-1), 1.3333, 0.0001);
     assertEquals(averageInArray.next(10), 4.0, 0.0001);
-    var t = 1;
-    assertEquals(t, 1);
   }
 }
