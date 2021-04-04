@@ -1056,4 +1056,22 @@ class ArrayUtils {
     }
     return result;
   }
+
+  public static int findMaxConsecutiveOnesWithKZeros(int[] nums, int k) {
+    if (nums == null || nums.length == 0) {
+      throw new IllegalArgumentException("Please check the array");
+    }
+    Queue<Integer> queue = new LinkedList<>();
+    int result = 0;
+    for (int left = 0, right = 0; right < nums.length; right++) {
+      if (nums[right] == 0) {
+        queue.add(right);
+      }
+      if (queue.size() > k) {
+        left = queue.poll() + 1;
+      }
+      result = Math.max(right - left + 1, result);
+    }
+    return result;
+  }
 }
