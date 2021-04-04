@@ -1074,4 +1074,24 @@ class ArrayUtils {
     }
     return result;
   }
+
+  public static int numSubArraysWithSum(int[] A, int S) {
+    return atMostSum(A, S) - atMostSum(A, S - 1);
+  }
+
+  public static int atMostSum(int[] nums, int S) {
+    if (S < 0) {
+      return 0;
+    }
+    int result = 0;
+    for (int left = 0, right = 0; right < nums.length; right++) {
+      S -= nums[right];
+      while (S < 0) {
+        S += nums[left++];
+      }
+      result += right - left + 1;
+    }
+
+    return result;
+  }
 }

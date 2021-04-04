@@ -267,22 +267,32 @@ class ArrayUtilsTest {
 
   @Test
   void maximumAscSubArraySumTest() {
-    Exception exception = assertThrows(IllegalArgumentException.class, () -> ArrayUtils.findMaxConsecutiveOnes(null));
+    Exception exception =
+        assertThrows(IllegalArgumentException.class, () -> ArrayUtils.findMaxConsecutiveOnes(null));
     assertTrue(exception.getMessage().contains("Please check the array"));
-    assertEquals(ArrayUtils.maximumAscSubArraySum(new int[]{10,20,30,5,10,50}), 65);
+    assertEquals(ArrayUtils.maximumAscSubArraySum(new int[] {10, 20, 30, 5, 10, 50}), 65);
   }
 
   @Test
-  void findMaxConsecutiveOnesTest(){
-    Exception exception = assertThrows(IllegalArgumentException.class, () -> ArrayUtils.findMaxConsecutiveOnes(null));
+  void findMaxConsecutiveOnesTest() {
+    Exception exception =
+        assertThrows(IllegalArgumentException.class, () -> ArrayUtils.findMaxConsecutiveOnes(null));
     assertTrue(exception.getMessage().contains("Please check the array"));
-    assertEquals(ArrayUtils.findMaxConsecutiveOnes(new int[]{1,0,1,1,0}), 4);
+    assertEquals(ArrayUtils.findMaxConsecutiveOnes(new int[] {1, 0, 1, 1, 0}), 4);
   }
 
   @Test
   void findMaxConsecutiveOnesWithKZerosTest() {
-    Exception exception = assertThrows(IllegalArgumentException.class, () -> ArrayUtils.findMaxConsecutiveOnesWithKZeros(null, 1));
+    Exception exception =
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> ArrayUtils.findMaxConsecutiveOnesWithKZeros(null, 1));
     assertTrue(exception.getMessage().contains("Please check the array"));
-    assertEquals(ArrayUtils.findMaxConsecutiveOnesWithKZeros(new int[]{1,0,1,1,0}, 1), 4);
+    assertEquals(ArrayUtils.findMaxConsecutiveOnesWithKZeros(new int[] {1, 0, 1, 1, 0}, 1), 4);
+  }
+
+  @Test
+  void numSubArraysWithSumTest() {
+    assertEquals(ArrayUtils.numSubArraysWithSum(new int[] {1, 0, 1, 0, 1}, 2), 4);
   }
 }
