@@ -1034,4 +1034,26 @@ class ArrayUtils {
     }
     return result;
   }
+
+  public static int findMaxConsecutiveOnes(int[] nums) {
+    // use sliding window
+    // you can have 1 space for sliding window
+    if (nums == null || nums.length == 0) {
+      throw new IllegalArgumentException("Please check the array");
+    }
+    int left = 0, countZero = 0, result = 0;
+    int n = nums.length;
+    for (int right = 0; right < n; right++) {
+      if (nums[right] == 0) {
+        countZero += 1;
+      }
+      while (countZero > 1) {
+        if (nums[left++] == 0) {
+          countZero -= 1;
+        }
+      }
+      result = Math.max(result, right - left + 1);
+    }
+    return result;
+  }
 }
