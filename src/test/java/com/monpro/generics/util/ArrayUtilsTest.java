@@ -6,8 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class ArrayUtilsTest {
   @Test
@@ -264,5 +263,12 @@ class ArrayUtilsTest {
     assertArrayEquals(
         ArrayUtils.smallestSubSequence(new int[] {2, 4, 3, 3, 5, 4, 9, 6}, 4),
         new int[] {2, 3, 3, 4});
+  }
+
+  @Test
+  void maximumAscSubArraySumTest() {
+    Exception exception = assertThrows(IllegalArgumentException.class, () -> ArrayUtils.maximumAscSubArraySum(null));
+    assertTrue(exception.getMessage().contains("Please check the array"));
+    assertEquals(ArrayUtils.maximumAscSubArraySum(new int[]{10,20,30,5,10,50}), 65);
   }
 }
