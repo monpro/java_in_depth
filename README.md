@@ -1,2 +1,3 @@
-# java_advanced_examples
-Contains examples using Java Advanced Techniques
+# java_in_depth
+
+Introduce in-depth examples of java
