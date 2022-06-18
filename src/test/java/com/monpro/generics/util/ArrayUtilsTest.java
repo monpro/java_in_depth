@@ -39,6 +39,7 @@ class ArrayUtilsTest {
     nums = new int[] {3, 0, 2, 1, 2};
     start = 2;
     assertEquals(ArrayUtils.canReachToIndexWithValueZero(nums, start), false);
+
   }
 
   @Test
@@ -294,5 +295,13 @@ class ArrayUtilsTest {
   @Test
   void numSubArraysWithSumTest() {
     assertEquals(ArrayUtils.numSubArraysWithSum(new int[] {1, 0, 1, 0, 1}, 2), 4);
+  }
+
+  @Test
+  void maxChunksToSortedTest() {
+    assertEquals(ArrayUtils.maxChunksToSorted(new int[]{3, 1 , 2, 0}), 1);
+    assertEquals(ArrayUtils.maxChunksToSorted(new int[]{1, 0, 3, 2, 4}), 3);
+
+
   }
 }
