@@ -1106,4 +1106,20 @@ class ArrayUtils {
     return result;
   }
 
+  public static int maxChunksToSortedII(int[] arr) {
+    Stack<Integer> stack = new Stack<>();
+    stack.add(arr[0]);
+    for (int i = 1; i < arr.length; i++) {
+      if (arr[i] >= stack.peek()) {
+        stack.add(arr[i]);
+      } else {
+        int peek = stack.peek();
+        while (!stack.isEmpty() && arr[i] <= stack.peek()) {
+          stack.pop();
+        }
+        stack.push(peek);
+      }
+     }
+    return stack.size();
+  }
 }
