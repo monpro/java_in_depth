@@ -113,4 +113,10 @@ class TreeUtilsTest {
     assertTrue(
         result.size() == list.size() && result.containsAll(list) && list.containsAll(result));
   }
+
+  @Test
+  void createBinaryTreeTest() {
+    int[][] description = new int[][]{{20,15,1}, {20,17,0}, {50,20,1}, {50,80,0}, {80, 19, 1}};
+    assertEquals(TreeUtils.createBinaryTree(description).val, 50);
+  }
 }

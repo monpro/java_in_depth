@@ -35,7 +35,7 @@ class AverageNode {
 }
 
 class ExpressionTreeNode {
-  private String symbol;
+  private final String symbol;
   ExpressionTreeNode left, right;
 
   ExpressionTreeNode(String symbol) {
@@ -262,5 +262,41 @@ class TreeUtils {
       lonelyNodesHelper(root.left, result);
       lonelyNodesHelper(root.right, result);
     }
+    }
+
+  /**
+   * descriptions[i] = [parentI, childI, isLeftI] indicates that parentI is the parent of childI in
+   * a binary tree of unique values. Furthermore, If isLeftI == 1, then childI is the left child of
+   * parentI. If isLeftI == 0, then childI is the right child of parentI.
+   */
+  public static TreeNode createBinaryTree(int[][] descriptions) {
+
+    // we need to have the mapping value -> node
+    Map<Integer, TreeNode> valueToNode = new HashMap<>();
+    Set<Integer> children = new HashSet<>();
+
+    for (int[] description : descriptions) {
+      int parent = description[0], child = description[1], isLeft = description[2];
+
+      TreeNode parentNode = valueToNode.getOrDefault(parent, new TreeNode(parent));
+
+      TreeNode childNode = valueToNode.getOrDefault(child, new TreeNode(child));
+      if (isLeft == 1) {
+        parentNode.left = childNode;
+      } else {
+        parentNode.right = childNode;
+      }
+      valueToNode.put(parent, parentNode);
+      valueToNode.put(child, childNode);
+      children.add(child);
+    }
+    TreeNode root = null;
+    for (int[] description : descriptions) {
+      if (!children.contains(description[0])) {
+        root = valueToNode.get(description[0]);
+        break;
+      }
+    }
+    return root;
   }
 }
