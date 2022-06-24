@@ -1122,4 +1122,22 @@ class ArrayUtils {
      }
     return stack.size();
   }
+
+  public static int maxSumMinProduct(int[] nums) {
+    int[] prefixSum = new int[nums.length + 1];
+    for(int i = 0; i < nums.length; i++) {
+      prefixSum[i + 1] = prefixSum[i] + nums[i];
+    }
+    Stack<Integer> monoStack = new Stack<>();
+    int result = 0;
+    for(int i = 0; i < nums.length; i++) {
+
+      while (!monoStack.isEmpty() && (i == nums.length || nums[monoStack.peek()] > nums[i])) {
+        int peek = monoStack.pop();
+        result = Math.max(result, nums[peek] * (prefixSum[i] - prefixSum[monoStack.isEmpty() ? 0 : monoStack.peek() + 1]));
+      }
+      monoStack.add(i);
+    }
+    return result;
+  }
 }
