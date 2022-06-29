@@ -119,4 +119,15 @@ class TreeUtilsTest {
     int[][] description = new int[][]{{20,15,1}, {20,17,0}, {50,20,1}, {50,80,0}, {80, 19, 1}};
     assertEquals(TreeUtils.createBinaryTree(description).val, 50);
   }
+
+  @Test
+  void averageOfSubtreeTest() {
+    TreeNode root = new TreeNode(4);
+    root.left = new TreeNode(8);
+    root.right = new TreeNode(5);
+    root.left.left = new TreeNode(0);
+    root.left.right = new TreeNode(1);
+    root.right.right = new TreeNode(6);
+    assertEquals(TreeUtils.averageOfSubtree(root), 5);
+  }
 }

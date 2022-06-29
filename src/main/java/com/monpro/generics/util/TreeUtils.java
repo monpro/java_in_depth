@@ -1,5 +1,6 @@
 package com.monpro.generics.util;
 
+import com.sun.source.tree.Tree;
 import javafx.util.Pair;
 
 import java.util.*;
@@ -298,5 +299,50 @@ class TreeUtils {
       }
     }
     return root;
+  }
+
+  private static final Map<TreeNode, TreeCountSum> memory = new HashMap<>();
+
+  public static int averageOfSubtree(TreeNode root) {
+    // how to know average
+    // node + subTree value / n + 1
+    // so I need a helper -> (count, sum)
+    // then the aveg = (sum + root.val) / count + 1
+    if (root == null) {
+      return 0;
+    }
+    int count = 0;
+    if ((root.val + averageHelper(root.left).sum + averageHelper(root.right).sum) / (averageHelper(root.left).count + averageHelper(root.right).count + 1) == root.val) {
+      count = 1;
+    }
+    return count + averageOfSubtree(root.left) + averageOfSubtree(root.right);
+  }
+
+  private static TreeCountSum averageHelper(TreeNode root) {
+    if (root == null) {
+      return new TreeCountSum(0, 0);
+    }
+    if (memory.containsKey(root)) {
+      return memory.get(root);
+    }
+    if (root.left == null && root.right == null) {
+      return new TreeCountSum(root.val, 1);
+    }
+
+    TreeCountSum left = averageHelper(root.left);
+    TreeCountSum right = averageHelper(root.right);
+    TreeCountSum result = new TreeCountSum(root.val + left.sum + right.sum, 1 + left.count + right.count);
+    memory.put(root, result);
+    return result;
+  }
+
+  static class TreeCountSum {
+    int sum;
+    int count;
+
+    public TreeCountSum(int sum, int count) {
+      this.sum = sum;
+      this.count = count;
+    }
   }
 }
