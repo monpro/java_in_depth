@@ -130,4 +130,15 @@ class TreeUtilsTest {
     root.right.right = new TreeNode(6);
     assertEquals(TreeUtils.averageOfSubtree(root), 5);
   }
+
+  @Test
+  void str2treeTest() {
+    String treeString = "4(2)(6(5))";
+    TreeNode treeNode = new TreeNode(4);
+    treeNode.left = new TreeNode(2);
+    treeNode.right = new TreeNode(6);
+    treeNode.right.left = new TreeNode(5);
+
+    assertEquals(TreeUtils.str2tree(treeString), treeNode);
+  }
 }

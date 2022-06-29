@@ -20,6 +20,19 @@ class TreeNode {
     this.left = left;
     this.right = right;
   }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    TreeNode treeNode = (TreeNode) o;
+    return val == treeNode.val && Objects.equals(left, treeNode.left) && Objects.equals(right, treeNode.right);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(val, left, right);
+  }
 }
 
 class AverageNode {
@@ -345,5 +358,48 @@ class TreeUtils {
     int sum = root.val + sumNodes(root.left) + sumNodes(root.right);
     countMemory.put(root, sum);
     return sum;
+  }
+
+  public static TreeNode str2tree(String s) {
+    // if meet ')', we need to pop up the element, then the stack top is parent
+    // if meet '-', we need to adjust the sign
+    // if meet '(', we simply cur++;
+    // if meet number, multiply by sign, then add into the slack
+    Stack<TreeNode> stack = new Stack<>();
+    int sign = 1, cur = 0;
+    TreeNode parent = null, child = null;
+    while (cur < s.length()) {
+      char curChar = s.charAt(cur);
+      if (curChar == ')') {
+        child = stack.pop();
+        parent = stack.peek();
+        if (parent.left == null) {
+          parent.left = child;
+        } else {
+          parent.right = child;
+        }
+        cur += 1;
+      }
+      else if (curChar == '(') {
+        cur += 1;
+      }
+      else if (curChar == '-') {
+        sign = -1;
+        cur += 1;
+      }
+      else {
+        int num = 0;
+        while (cur < s.length() && s.charAt(cur) >= '0' && s.charAt(cur)  <= '9') {
+          num = num * 10 + s.charAt(cur) - '0';
+          cur += 1;
+        }
+        stack.push(new TreeNode(sign * num));
+        sign = 1;
+      }
+    }
+    if (!stack.isEmpty()) {
+      return stack.peek();
+    }
+    return parent;
   }
 }
