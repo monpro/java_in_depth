@@ -321,4 +321,29 @@ class TreeUtils {
     return new Pair<>(sum, count);
   }
 
+  private static final Map<TreeNode, Integer> countMemory = new HashMap<>();
+  public static int equalToDescendants(TreeNode root) {
+    if (root == null) {
+      return 0;
+    }
+    int left = sumNodes(root.left);
+    int right = sumNodes(root.right);
+    int count = 0;
+    if (left + right == root.val) {
+      count = 1;
+    }
+    return count + equalToDescendants(root.left) + equalToDescendants(root.right);
+  }
+
+  private static int sumNodes(TreeNode root) {
+    if (root == null) {
+      return 0;
+    }
+    if (countMemory.containsKey(root)) {
+      return countMemory.get(root);
+    }
+    int sum = root.val + sumNodes(root.left) + sumNodes(root.right);
+    countMemory.put(root, sum);
+    return sum;
+  }
 }
