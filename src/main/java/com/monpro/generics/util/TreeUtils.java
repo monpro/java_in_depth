@@ -402,4 +402,30 @@ class TreeUtils {
     }
     return parent;
   }
+
+  public static int countHighestScoreNodes(int[] parents) {
+    List<List<Integer>> parentsToChild = new ArrayList<>();
+    for (int i = 0; i < parents.length; i++) {
+      parentsToChild.add(new ArrayList<>());
+    }
+    long[] count = new long[parents.length];
+    for (int i = 1; i< parents.length; i++) {
+      parentsToChild.get(parents[i]).add(i);
+    }
+    getSum(parentsToChild, count, 0);
+    long maxCount = Arrays.stream(count).max().getAsLong();
+    return (int) Arrays.stream(count).filter(value -> value == maxCount).count();
+  }
+
+  private static long getSum(List<List<Integer>> parentsToChild, long[] count, int index) {
+    long prod = 1, sum = 1;
+    for(int child : parentsToChild.get(index)) {
+      long childSum = getSum(parentsToChild, count, child);
+      prod *= childSum;
+      sum += childSum;
+    }
+    count[index] = prod * Math.max(1, parentsToChild.size() - sum);
+    return sum;
+  }
+
 }
