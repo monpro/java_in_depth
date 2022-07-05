@@ -1184,4 +1184,25 @@ class ArrayUtils {
     }
     return result;
   }
+
+  public int mincostTickets(int[] days, int[] costs) {
+    // travelCost[i] means the minCost at day i
+    int lastDay = days[days.length - 1];
+    int[] travelCost = new int[lastDay + 1];
+    boolean[] isTravel = new boolean[lastDay + 1];
+    for(int day : days) {
+      isTravel[day] = true;
+    }
+    for (int day = 1; day <= lastDay; day++) {
+      if (!isTravel[day]) {
+        travelCost[day] = travelCost[day - 1];
+      } else {
+        travelCost[day] = travelCost[day - 1] + costs[0];
+        travelCost[day] = Math.min(travelCost[Math.max(0, day - 7)] + costs[1], travelCost[day]);
+        travelCost[day] = Math.min(travelCost[Math.max(0, day - 30)] + costs[2], travelCost[day]);
+      }
+    }
+
+    return travelCost[lastDay];
+  }
 }
