@@ -1140,4 +1140,27 @@ class ArrayUtils {
     }
     return result;
   }
+  public static int maximumUnits(int[][] boxTypes, int truckSize) {
+    // we need to have a decrease order of units
+    // we first pick the largest unit
+    TreeMap<Integer, Integer> unitToNum = new TreeMap<>(new Comparator<Integer>() {
+      @Override
+      public int compare(Integer o1, Integer o2) {
+        return o2.compareTo(o1);
+      }
+    });
+    for(int[] boxType: boxTypes) {
+      unitToNum.put(boxType[1], unitToNum.getOrDefault(boxType[1], 0) + boxType[0]);
+    }
+
+    int result = 0;
+    for(Map.Entry<Integer, Integer> entry : unitToNum.entrySet()) {
+      int unit = entry.getKey();
+      int boxCount = Math.min(truckSize, entry.getValue());
+      int toBeAdded = Math.min(truckSize, boxCount) * unit;
+      result += toBeAdded;
+      truckSize -= boxCount;
+    }
+    return result;
+  }
 }

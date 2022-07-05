@@ -307,6 +307,10 @@ class ArrayUtilsTest {
   void maxChunksToSortedIITest(){
     assertEquals(ArrayUtils.maxChunksToSortedII(new int[]{3, 11 , 2, 1}), 1);
     assertEquals(ArrayUtils.maxChunksToSortedII(new int[]{1, 3 , 4, 6, 9, 8}), 5);
+  }
 
+  @Test
+  void maximumUnitsTest() {
+    assertEquals(ArrayUtils.maximumUnits(new int[][]{{1, 3}, {2, 2}, {3, 1}}, 4), 8);
   }
 }
