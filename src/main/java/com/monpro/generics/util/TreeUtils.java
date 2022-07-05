@@ -62,6 +62,20 @@ class ExpressionTreeNode {
   }
 }
 
+class RowColNode {
+  int row;
+  int col;
+  TreeNode node;
+
+  public RowColNode(int row, int col, TreeNode node) {
+    this.row = row;
+    this.col = col;
+    this.node = node;
+  }
+}
+
+
+
 class TreeUtils {
   private TreeUtils() {}
 
@@ -428,4 +442,36 @@ class TreeUtils {
     return sum;
   }
 
+  public List<List<Integer>> verticalTraversal(TreeNode root) {
+    List<List<Integer>> results = new ArrayList<>();
+    Queue<RowColNode> queue = new LinkedList<>();
+    TreeMap<Integer, List<RowColNode>> colToNodes = new TreeMap<>();
+    queue.add(new RowColNode(0, 0, root));
+    while (!queue.isEmpty()) {
+      RowColNode rowColNode = queue.poll();
+      List<RowColNode> nodes = colToNodes.getOrDefault(rowColNode.col, new ArrayList<>());
+      nodes.add(rowColNode);
+      colToNodes.put(rowColNode.col, nodes);
+
+      if (rowColNode.node.left != null) {
+        queue.add(new RowColNode(rowColNode.row + 1, rowColNode.col - 1, rowColNode.node.left));
+      }
+      if (rowColNode.node.right != null) {
+        queue.add(new RowColNode(rowColNode.row + 1, rowColNode.col + 1, rowColNode.node.right));
+      }
+    }
+    colToNodes.forEach(
+      (col, nodes) -> { nodes.sort((node1, node2) -> {
+        if (node1.row < node2.row) return -1;
+        else if (node1.row > node2.row) return 1;
+        else return node1.node.val - node2.node.val;
+      });
+      List<Integer> curColNodes = new ArrayList<>();
+      for (RowColNode rowColNode : nodes) {
+        curColNodes.add(rowColNode.node.val);
+      }
+      results.add(curColNodes);
+    });
+    return results;
+  }
 }
