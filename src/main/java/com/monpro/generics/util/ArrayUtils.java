@@ -1163,4 +1163,25 @@ class ArrayUtils {
     }
     return result;
   }
+
+  public static int maximumUnitsBucketSort(int[][] boxTypes, int truckSize) {
+    // we need to have a decrease order of units
+    // we first pick the largest unit
+    int[] unitsToBox = new int[1001];
+    for (int[] boxType : boxTypes) {
+      unitsToBox[boxType[1]] += boxType[0];
+    }
+    int result = 0;
+    for (int i = 1000; i >= 0; i--) {
+      int box = unitsToBox[i];
+      if (box > truckSize) {
+        result += i * truckSize;
+        break;
+      } else {
+        result += i * box;
+        truckSize -= box;
+      }
+    }
+    return result;
+  }
 }

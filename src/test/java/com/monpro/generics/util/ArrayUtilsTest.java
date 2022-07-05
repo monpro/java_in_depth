@@ -312,5 +312,6 @@ class ArrayUtilsTest {
   @Test
   void maximumUnitsTest() {
     assertEquals(ArrayUtils.maximumUnits(new int[][]{{1, 3}, {2, 2}, {3, 1}}, 4), 8);
+    assertEquals(ArrayUtils.maximumUnitsBucketSort(new int[][]{{1, 3}, {2, 2}, {3, 1}}, 4), 8);
   }
 }
