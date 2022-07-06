@@ -315,4 +315,21 @@ class StringUtils {
     }
     return 1 + findMinFibonacciNumbers(k - a);
   }
+
+  public static int monotoneIncreasingDigits(int n) {
+    // 12321 -> n < 12221
+    char[] arr = String.valueOf(n).toCharArray();
+    int end = arr.length - 1;
+    for (int i = arr.length -1; i >= 1; i--) {
+      if (arr[i] < arr[i - 1]) {
+        arr[i - 1] -= 1;
+        end = i - 1;
+      }
+    }
+    for (int i = end + 1; i < arr.length; i++) {
+      arr[i] = '9';
+    }
+
+    return Integer.parseInt(new String(arr));
+  }
 }

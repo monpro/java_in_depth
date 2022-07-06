@@ -100,4 +100,10 @@ class StringUtilsTest {
   void findMinFibonacciNumbersTest() {
     assertEquals(StringUtils.findMinFibonacciNumbers(7), 2);
   }
+
+  @Test
+  void monotoneIncreasingDigitsTest() {
+    assertEquals(StringUtils.monotoneIncreasingDigits(12322), 12299);
+  }
+
 }
