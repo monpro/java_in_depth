@@ -314,4 +314,10 @@ class ArrayUtilsTest {
     assertEquals(ArrayUtils.maximumUnits(new int[][]{{1, 3}, {2, 2}, {3, 1}}, 4), 8);
     assertEquals(ArrayUtils.maximumUnitsBucketSort(new int[][]{{1, 3}, {2, 2}, {3, 1}}, 4), 8);
   }
+
+  @Test
+  void findJudgeTest() {
+    assertEquals(ArrayUtils.findJudge(3, new int[][]{{1, 3}, {2, 3}}), 3);
+    assertEquals(ArrayUtils.findJudge(3, new int[][]{{1, 3}, {2, 3}, {3, 1}}), -1);
+  }
 }
