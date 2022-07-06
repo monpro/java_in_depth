@@ -106,4 +106,9 @@ class StringUtilsTest {
     assertEquals(StringUtils.monotoneIncreasingDigits(12322), 12299);
   }
 
+  @Test
+  void truncateSentenceTest() {
+    assertEquals(StringUtils.truncateSentence("Hello how are you Contestant", 4), "Hello how are you");
+    assertEquals(StringUtils.truncateSentence("Hello how are you", 15), "Hello how are you");
+  }
 }
