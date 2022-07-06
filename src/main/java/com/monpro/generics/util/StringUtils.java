@@ -303,4 +303,16 @@ class StringUtils {
     }
     return -1;
   }
+
+  public static int findMinFibonacciNumbers(int k) {
+    if (k <= 1) {
+      return k;
+    }
+    int a = 1, b = 1;
+    while (b <= k) {
+      b = a + b;
+      a = b - a;
+    }
+    return 1 + findMinFibonacciNumbers(k - a);
+  }
 }

@@ -95,4 +95,9 @@ class StringUtilsTest {
   void isPrefixOfWordTest() {
     assertEquals(StringUtils.isPrefixOfWord("i love eating burger", "burg"), 4);
   }
+
+  @Test
+  void findMinFibonacciNumbersTest() {
+    assertEquals(StringUtils.findMinFibonacciNumbers(7), 2);
+  }
 }
