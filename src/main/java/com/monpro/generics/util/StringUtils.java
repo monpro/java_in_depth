@@ -258,4 +258,39 @@ class StringUtils {
     }
     return sb.reverse().toString();
   }
+
+  public static int minSwaps(String s) {
+    int ones = 0, zeros = 0;
+    for(char c : s.toCharArray()) {
+      if (c == '0') {
+        zeros += 1;
+      } else {
+        ones += 1;
+      }
+    }
+
+    if (Math.abs(zeros - ones) > 1) {
+      return -1;
+    }
+
+    if (zeros - ones == 1) {
+      return minSwapsStartWithCh(s, '0');
+    } else if (ones - zeros == 1) {
+      return minSwapsStartWithCh(s, '1');
+    } else {
+      return Math.min(minSwapsStartWithCh(s, '0'), minSwapsStartWithCh(s, '1'));
+    }
+  }
+
+  private static int minSwapsStartWithCh(String s, char ch) {
+    int count = 0;
+    for(char c : s.toCharArray()) {
+      if (c != ch) {
+        count += 1;
+      }
+      ch ^= 1;
+    }
+
+    return count / 2;
+  }
 }

@@ -85,4 +85,9 @@ class StringUtilsTest {
     assertEquals(StringUtils.removeAdjacentKDuplicates("aaacb", 3), "cb");
     assertEquals(StringUtils.removeAdjacentKDuplicates("deeedbbcccbdaa", 3), "aa");
   }
+
+  @Test
+  void minSwapsTest() {
+    assertEquals(StringUtils.minSwaps("11010"), 2);
+  }
 }
