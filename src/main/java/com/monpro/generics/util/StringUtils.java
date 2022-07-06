@@ -332,4 +332,47 @@ class StringUtils {
 
     return Integer.parseInt(new String(arr));
   }
+
+  public static int findCelebrity(int n) {
+    if (n == 0) return -1;
+    if (n == 1) return 0;
+
+    Stack<Integer> stack = new Stack<>();
+    for(int i = 0; i < n; i++) {
+      stack.add(i);
+    }
+    int a = 0, b = 0;
+
+    while (stack.size() > 1) {
+      a = stack.pop();
+      b = stack.pop();
+
+      if (knows(a, b)) {
+        stack.add(b);
+      } else {
+        stack.add(a);
+      }
+    }
+
+    int cel = stack.pop();
+
+    for(int i = 0; i < n; i++) {
+      if (i != cel && (knows(cel, i) || !knows(i, cel))) {
+        return -1;
+      }
+    }
+    return cel;
+
+  }
+
+  /**
+   *
+   * @param a candidate a.
+   * @param b candidate b.
+   * @return true if a knows b false otherwise
+   */
+  private static boolean knows(int a, int b) {
+    // TODO: add implementation
+    return true;
+  }
 }
