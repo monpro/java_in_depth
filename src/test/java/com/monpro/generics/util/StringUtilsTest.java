@@ -90,4 +90,9 @@ class StringUtilsTest {
   void minSwapsTest() {
     assertEquals(StringUtils.minSwaps("11010"), 2);
   }
+
+  @Test
+  void isPrefixOfWordTest() {
+    assertEquals(StringUtils.isPrefixOfWord("i love eating burger", "burg"), 4);
+  }
 }
