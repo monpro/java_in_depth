@@ -1254,4 +1254,35 @@ class ArrayUtils {
     }
     return result;
   }
+
+  public static int minSetSize(int[] arr) {
+    Map<Integer, Integer> counter = new HashMap<>();
+    ArrayList<Integer>[] list = new ArrayList[arr.length + 1];
+    for (int num : arr) {
+      counter.put(num, counter.getOrDefault(num, 0) + 1);
+    }
+
+    for (Map.Entry<Integer, Integer> entry : counter.entrySet()) {
+      int num = entry.getKey(), count = entry.getValue();
+      if (list[count] == null) {
+        list[count] = new ArrayList<>();
+      }
+      list[count].add(num);
+    }
+    int steps = 0, result = 0;
+    for (int i = arr.length; i >= 0; i--) {
+      List<Integer> nums = list[i];
+      if (nums == null || nums.size() == 0) {
+        continue;
+      }
+      for(int num : nums) {
+        steps += i;
+        result += 1;
+        if (steps >= arr.length / 2) {
+          return result;
+        }
+      }
+    }
+    return -1;
+  }
 }
