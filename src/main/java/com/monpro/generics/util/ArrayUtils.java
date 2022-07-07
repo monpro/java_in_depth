@@ -1221,4 +1221,37 @@ class ArrayUtils {
     }
     return -1;
   }
+
+  public static int minDifferenceAfterThreeMove(int[] nums) {
+    int numsLength = nums.length;
+    if (numsLength < 5) {
+      return 0;
+    }
+
+    PriorityQueue<Integer> maxPq = new PriorityQueue<>();
+    PriorityQueue<Integer> minPq = new PriorityQueue<>(Collections.reverseOrder());
+
+    for(int num : nums) {
+      maxPq.add(num);
+      minPq.add(num);
+      if (maxPq.size() > 4) {
+        maxPq.poll();
+        minPq.poll();
+      }
+    }
+
+    int[] maxNum = new int[4];
+    int[] minNum = new int[4];
+
+    for(int i = 0, k = 3; i < 4; i++, k--) {
+      maxNum[i] = maxPq.poll();
+      minNum[k] = minPq.poll();
+    }
+
+    int result = Integer.MAX_VALUE;
+    for (int i = 0; i < 4; i++) {
+      result = Math.min(result, maxNum[i] - minNum[i]);
+    }
+    return result;
+  }
 }
