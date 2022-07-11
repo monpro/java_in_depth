@@ -1285,4 +1285,22 @@ class ArrayUtils {
     }
     return -1;
   }
+
+  public static int[] sortedSquares(int[] nums) {
+    // we simply cal Math.abs(num)
+
+    int left = 0, right = nums.length - 1;
+    int[] result = new int[nums.length];
+
+    for(int index = nums.length - 1; index >= 0; index--) {
+      if (Math.abs(nums[left]) >= Math.abs(nums[right])) {
+        result[index] = nums[left] * nums[left];
+        left += 1;
+      } else {
+        result[index] = nums[right] * nums[right];
+        right -= 1;
+      }
+    }
+    return result;
+  }
 }

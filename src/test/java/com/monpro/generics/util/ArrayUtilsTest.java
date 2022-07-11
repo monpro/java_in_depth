@@ -320,4 +320,9 @@ class ArrayUtilsTest {
     assertEquals(ArrayUtils.findJudge(3, new int[][]{{1, 3}, {2, 3}}), 3);
     assertEquals(ArrayUtils.findJudge(3, new int[][]{{1, 3}, {2, 3}, {3, 1}}), -1);
   }
+
+  @Test
+  void sortedSquaresTest() {
+    assertArrayEquals(ArrayUtils.sortedSquares(new int[]{-4,-1,0,3,10}), new int[]{0,1,9,16,100});
+  }
 }
