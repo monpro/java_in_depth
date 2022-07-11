@@ -474,4 +474,33 @@ class TreeUtils {
     });
     return results;
   }
+
+  public static List<List<String>> printTree(TreeNode root) {
+    List<List<String>> result = new ArrayList<>();
+    int height = getHeight(root);
+    int row = height, col = (int)(Math.pow(2, height) - 1);
+    for(int i = 0; i < row; i++) {
+      List<String> temp = new ArrayList<>();
+      for(int j = 0; j < col; j++) {
+        temp.add("");
+      }
+      result.add(temp);
+    }
+    buildTree(result, root, 0, col - 1, row, 0);
+    return result;
+  }
+
+  private static void buildTree(List<List<String>> result, TreeNode root, int left, int right, int height, int level) {
+    if (height == level || root == null) return;
+
+    int mid = left + (right - left) / 2;
+    result.get(level).set(mid, String.valueOf(root.val));
+    buildTree(result, root.left, left, mid - 1, height, level + 1);
+    buildTree(result, root.right, mid + 1, right, height, level + 1);
+  }
+
+   private static int getHeight(TreeNode root) {
+    if (root == null) return 0;
+    return 1 + Math.max(getHeight(root.left), getHeight(root.right));
+  }
 }

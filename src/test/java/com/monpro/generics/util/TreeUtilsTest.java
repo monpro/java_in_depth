@@ -146,4 +146,12 @@ class TreeUtilsTest {
   void countHighestScoreNodesTest() {
     assertEquals(TreeUtils.countHighestScoreNodes(new int[]{-1, 2, 0, 2, 0}), 3);
   }
+
+  @Test
+  void printTreeTest() {
+    TreeNode root = new TreeNode(1);
+    root.left = new TreeNode(2);
+    root.right = new TreeNode(3);
+    assertEquals(TreeUtils.printTree(root), List.of(List.of("", "1", ""), List.of("2", "", "3")));
+  }
 }
