@@ -111,4 +111,10 @@ class StringUtilsTest {
     assertEquals(StringUtils.truncateSentence("Hello how are you Contestant", 4), "Hello how are you");
     assertEquals(StringUtils.truncateSentence("Hello how are you", 15), "Hello how are you");
   }
+
+  @Test
+  void nextGreatestLetterTest() {
+    assertEquals(StringUtils.nextGreatestLetter(new char[]{'c','f','j'}, 'a'), 'c');
+    assertEquals(StringUtils.nextGreatestLetter(new char[]{'c','f','j'}, 'q'), 'c');
+  }
 }
